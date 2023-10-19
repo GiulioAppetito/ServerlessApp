@@ -25,27 +25,36 @@
     </style>
     <script>
         var callAPI = () => {
-            var cityName = document.getElementById('fName').value; // Ottieni il valore da "fName" input
+    var cityName = document.getElementById('fName').value; // Ottieni il valore da "fName" input
 
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-            var raw = JSON.stringify({"cityName": cityName});
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({"cityName": cityName});
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
 
-            fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
-            .then(response => return response.json()) // Analizza il corpo della risposta come JSON
-            .then(data => {
-                document.getElementById('cityName').textContent = data.cityName;
-                document.getElementById('cloudiness').textContent = data.cloudiness;
-                document.getElementById('temp').textContent = data.temp;
-            })
-            .catch(error => console.error('Errore nella richiesta: ' + error));
-        }
+    fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+        var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
+        // Estrarre i singoli campi dalla risposta JSON
+        var cityName = data.cityName;
+        var temp = data.temp;
+        var humidity = data.humidity;
+        var cloudiness = data.cloudiness;
+
+        // Aggiorna gli elementi HTML con i dati estratti
+        document.getElementById('cityName').textContent = cityName;
+        document.getElementById('cloudiness').textContent = cloudiness;
+        document.getElementById('temp').textContent = temp;
+    })
+    .catch(error => console.error('Errore nella richiesta: ' + error));
+}
+
     </script>
 </head>
 <body>
