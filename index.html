@@ -23,33 +23,33 @@
     </style>
     <script>
     var callAPI = (cityName) => {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        var raw = JSON.stringify({"cityName": cityName});
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify({"cityName": cityName});
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
 
-        fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
-        .then(response => response.json()) // Parse the response as JSON
-        .then(data => {
-            // Extract individual fields from the response
-            var cityName = data.cityName;
-            var temp = data.temp;
-            var humidity = data.humidity;
-            var cloudiness = data.cloudiness;
+    fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+        // Extract individual fields from the response
+        var cityName = data.cityName;
+        var temp = data.temp;
+        var humidity = data.humidity;
+        var cloudiness = data.cloudiness;
 
-            // Update HTML elements with the extracted data
-            document.getElementById("cityName").textContent = cityName;
-            document.getElementById("temp").textContent = temp + ' °C';
-            document.getElementById("humidity").textContent = humidity + ' %';
-            document.getElementById("cloudiness").textContent = cloudiness;
-        })
-        .catch(error => console.log('error', error));
-    }
+        // Update HTML elements with the extracted data
+        document.getElementById("cityName").textContent = cityName;
+        document.getElementById("temp").textContent = temp + ' °C';
+        document.getElementById("humidity").textContent = humidity + ' %';
+        document.getElementById("cloudiness").textContent = cloudiness;
+    })
+    .catch(error => console.log('error', error));
+}
 </script>
 </head>
 <body>
