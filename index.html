@@ -22,31 +22,35 @@
         }
     </style>
     <script>
-        // define the callAPI function that takes a first name and last name as parameters
-        var callAPI = (cityName)=>{
-            // instantiate a headers object
-            var myHeaders = new Headers();
-            // add content type header to object
-            myHeaders.append("Content-Type", "application/json");
-            // using built in JSON utility package turn object to string and store in a variable
-            var raw = JSON.stringify({"cityName":cityName});
-            // create a JSON object with parameters for API call and store in a variable
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: raw,
-                redirect: 'follow'
-            };
-            // make the API call with parameters and use promises to get the response
-            fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                // Display the result in the HTML element with the ID "resultContainer"
-                document.getElementById("resultContainer").textContent = JSON.parse(result).body;
-            })
-            .catch(error => console.log('error', error));
-        }
-    </script>
+    var callAPI = (cityName) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({"cityName": cityName});
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
+        .then(response => response.json()) // Parse the response as JSON
+        .then(data => {
+            // Extract individual fields from the response
+            var cityName = data.cityName;
+            var temp = data.temp;
+            var humidity = data.humidity;
+            var cloudiness = data.cloudiness;
+
+            // Update HTML elements with the extracted data
+            document.getElementById("cityName").textContent = cityName;
+            document.getElementById("temp").textContent = temp + ' °C';
+            document.getElementById("humidity").textContent = humidity + ' %';
+            document.getElementById("cloudiness").textContent = cloudiness;
+        })
+        .catch(error => console.log('error', error));
+    }
+</script>
 </head>
 <body>
     <form>
@@ -55,6 +59,9 @@
         <!-- set button onClick method to call function we defined passing input values as parameters -->
         <button type="button" onclick="callAPI(document.getElementById('fName').value)">Search</button>
     </form>
-    <div id="resultContainer" color: #ffffff>ResultContainer is empty</div>
+    <div id="cityName" color: #ffffff>cityName</div>
+    <div id="temp" color: #ffffff>temp</div>
+    <div id="humidity" color: #ffffff>humidity</div>
+    <div id="cloudiness" color: #ffffff>cloudiness</div>
 </body>
 </html>
