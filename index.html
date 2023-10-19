@@ -5,63 +5,65 @@
     <title>Hello World</title>
     <!-- Add some CSS to change client UI -->
     <style>
-    body {
-        background-color: #232F3E;
+        body {
+            background-color: #232F3E;
         }
-    label, button {
-        color: #FF9900;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20px;
-        margin-left: 40px;
+
+        label, button {
+            color: #FF9900;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            margin-left: 40px;
         }
-     input {
-        color: #232F3E;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20px;
-        margin-left: 20px;
+
+        input {
+            color: #232F3E;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            margin-left: 20px;
         }
     </style>
     <script>
-    var callAPI = (cityName) => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify({"cityName": cityName});
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
+        var callAPI = (cityName) => {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({ "cityName": cityName });
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
 
-    fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => {
-        // Extract individual fields from the response
-        var cityName = data.cityName;
-        var temp = data.temp;
-        var humidity = data.humidity;
-        var cloudiness = data.cloudiness;
+            fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
+                .then(response => response.json()) // Parse the response as JSON
+                .then(data => {
+                    // Extract individual fields from the response
+                    var cityName = data.cityName;
+                    var temp = data.temp;
+                    var humidity = data.humidity;
+                    var cloudiness = data.cloudiness;
 
-        // Update HTML elements with the extracted data
-        document.getElementById("cityName").textContent = cityName;
-        document.getElementById("temp").textContent = temp + ' °C';
-        document.getElementById("humidity").textContent = humidity + ' %';
-        document.getElementById("cloudiness").textContent = cloudiness;
-    })
-    .catch(error => console.log('error', error));
-}
-</script>
+                    // Update HTML elements with the extracted data
+                    document.getElementById("cityNameResult").textContent = cityName;
+                    document.getElementById("tempResult").textContent = temp + ' °C';
+                    document.getElementById("humidityResult").textContent = humidity + ' %';
+                    document.getElementById("cloudinessResult").textContent = cloudiness;
+                })
+                .catch(error => console.log('error', error));
+        }
+    </script>
 </head>
 <body>
     <form>
-        <label>First Name :</label>
+        <label>City Name :</label>
         <input type="text" id="fName">
         <!-- set button onClick method to call function we defined passing input values as parameters -->
         <button type="button" onclick="callAPI(document.getElementById('fName').value)">Search</button>
     </form>
-    <div id="cityName" color: #ffffff>cityName</div>
-    <div id="temp" color: #ffffff>temp</div>
-    <div id="humidity" color: #ffffff>humidity</div>
-    <div id="cloudiness" color: #ffffff>cloudiness</div>
+    <div id="cityNameResult" style="color: #ffffff;">cityName</div>
+    <div id="tempResult" style="color: #ffffff;">temp</div>
+    <div id="humidityResult" style="color: #ffffff;">humidity</div>
+    <div id="cloudinessResult" style="color: #ffffff;">cloudiness</div>
 </body>
 </html>
