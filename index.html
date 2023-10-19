@@ -1,29 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script>
-        function updateWeatherData() {
-            // Effettua una richiesta REST per ottenere i dati dalla tua funzione Lambda
-            fetch('URL_DEL_TUO_API_GATEWAY_O_LAMBDA_FUNCTION')
-                .then(response => response.json())
-                .then(data => {
-                    // Popola i campi HTML con i dati ricevuti
-                    document.getElementById('cityName').textContent = data.cityName;
-                    document.getElementById('temp').textContent = data.temp + ' °C';
-                    document.getElementById('humidity').textContent = data.humidity + ' %';
-                    document.getElementById('cloudiness').textContent = data.cloudiness;
-                })
-                .catch(error => console.error('Errore nella richiesta: ' + error));
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <!-- Add some CSS to change client UI -->
+    <style>
+    body {
+        background-color: #232F3E;
         }
-
-        // Chiamata alla funzione per aggiornare i dati quando la pagina si carica
-        window.onload = updateWeatherData;
+    label, button {
+        color: #FF9900;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        margin-left: 40px;
+        }
+     input {
+        color: #232F3E;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        margin-left: 20px;
+        }
+    </style>
+    <script>
+        // define the callAPI function that takes a first name and last name as parameters
+        var callAPI = (cityName)=>{
+            // instantiate a headers object
+            var myHeaders = new Headers();
+            // add content type header to object
+            myHeaders.append("Content-Type", "application/json");
+            // using built in JSON utility package turn object to string and store in a variable
+            var raw = JSON.stringify({"cityName":cityName});
+            // create a JSON object with parameters for API call and store in a variable
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            // make the API call with parameters and use promises to get the response
+            fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                // Display the result in the HTML element with the ID "resultContainer"
+                document.getElementById("resultContainer").textContent = JSON.parse(result).body;
+            })
+            .catch(error => console.log('error', error));
+        }
     </script>
 </head>
 <body>
-    <h1>Informazioni meteo per <span id="cityName"></span></h1>
-    <p>Temperatura: <span id="temp"></span></p>
-    <p>Umidità: <span id="humidity"></span></p>
-    <p>Condizioni di nuvolosità: <span id="cloudiness"></span></p>
+    <form>
+        <label>First Name :</label>
+        <input type="text" id="fName">
+        <!-- set button onClick method to call function we defined passing input values as parameters -->
+        <button type="button" onclick="callAPI(document.getElementById('fName').value)">Search</button>
+    </form>
+    <div id="resultContainer" color: #ffffff>ResultContainer is empty</div>
 </body>
 </html>
