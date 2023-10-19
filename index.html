@@ -24,43 +24,14 @@
         }
     </style>
     <script>
-        var callAPI = (cityName) => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify({"cityName": cityName});
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-
-    fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => {
-        // Debug: Log the response
-        console.log(data);
-
-        // Extract individual fields from the response
-        var cityName = data.cityName;
-        var temp = data.temp;
-        var humidity = data.humidity;
-        var cloudiness = data.cloudiness;
-
-        // Debug: Log the extracted fields
-        console.log("cityName: " + cityName);
-        console.log("temp: " + temp);
-        console.log("humidity: " + humidity);
-        console.log("cloudiness: " + cloudiness);
-
-        // Update HTML elements with the extracted data
-        document.getElementById("cityNameResult").textContent = cityName;
-        document.getElementById("tempResult").textContent = temp + ' °C';
-        document.getElementById("humidityResult").textContent = humidity + ' %';
-        document.getElementById("cloudinessResult").textContent = cloudiness;
-    })
-    .catch(error => console.log('error', error));
-}
+        fetch('https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev')
+        .then(response => response.json()) // Analizza il corpo della risposta come JSON
+        .then(data => {
+            document.getElementById('cityName').textContent = data.cityName;
+            document.getElementById('cloudiness').textContent = data.cloudiness;
+            document.getElementById('temp').textContent = data.temp;
+        })
+        .catch(error => console.error('Errore nella richiesta: ' + error));
     </script>
 </head>
 <body>
@@ -70,9 +41,8 @@
         <!-- set button onClick method to call function we defined passing input values as parameters -->
         <button type="button" onclick="callAPI(document.getElementById('fName').value)">Search</button>
     </form>
-    <div id="cityNameResult" style="color: #ffffff;">cityName</div>
-    <div id="tempResult" style="color: #ffffff;">temp</div>
-    <div id="humidityResult" style="color: #ffffff;">humidity</div>
-    <div id="cloudinessResult" style="color: #ffffff;">cloudiness</div>
+    <div id="cityName" style="color: #ffffff;">cityName</div>
+    <div id="cloudiness" style="color: #ffffff;">cloudiness</div>
+    <div id="temp" style="color: #ffffff;">temp</div>
 </body>
 </html>
