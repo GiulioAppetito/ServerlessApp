@@ -37,10 +37,13 @@
                 body: raw,
                 redirect: 'follow'
             };
-            // make API call with parameters and use promises to get response
+            // make the API call with parameters and use promises to get the response
             fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
             .then(response => response.text())
-            .then(result => alert(JSON.parse(result).body))
+            .then(result => {
+                // Display the result in the HTML element with the ID "resultContainer"
+                document.getElementById("resultContainer").textContent = JSON.parse(result).body;
+            })
             .catch(error => console.log('error', error));
         }
     </script>
