@@ -38,7 +38,7 @@
             };
 
             fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
-            .then(response => response.json()) // Analizza il corpo della risposta come JSON
+            .then(response => return response.json()) // Analizza il corpo della risposta come JSON
             .then(data => {
                 document.getElementById('cityName').textContent = data.cityName;
                 document.getElementById('cloudiness').textContent = data.cloudiness;
