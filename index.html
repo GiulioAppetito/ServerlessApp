@@ -35,16 +35,18 @@
                     'Content-Type': 'application/json',
                 },
             })
-            .then(response => response.json())
-            .then(data => {
-                // Utilizza i dati come desiderato
-                var temperature = data.temperature;
+            .then(response => response.text())
+            .then(result => {
+                var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
+                // Estrarre i singoli campi dalla risposta JSON
+                var cityName = data.cityName;
+                var temp = data.temp;
                 var humidity = data.humidity;
                 var cloudiness = data.cloudiness;
         
-                // Esempio: aggiorna elementi HTML con i dati
-                document.getElementById('temperature').textContent = temperature + '°C';
-                document.getElementById('humidity').textContent = humidity + '%';
+                // Aggiorna gli elementi HTML con i dati estratti
+                document.getElementById('temperature').textContent = temp;
+                document.getElementById('humidity').textContent = humidity;
                 document.getElementById('cloudiness').textContent = cloudiness;
             })
             .catch(error => console.error('Errore nella richiesta: ' + error));
