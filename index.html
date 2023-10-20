@@ -39,13 +39,13 @@
             .then(result => {
                 var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
                 // Estrarre i singoli campi dalla risposta JSON
-                var cityName = data.cityName;
+                var city = data.cityName;
                 var temp = data.temp;
                 var humidity = data.humidity;
                 var cloudiness = data.cloudiness;
         
                 // Aggiorna gli elementi HTML con i dati estratti
-                document.getElementById('city').textContent = "City : " + cityName;
+                document.getElementById('city').textContent = "City : " + city;
                 document.getElementById('temperature').textContent = "Temperature : " + temp + " °C";
                 document.getElementById('humidity').textContent = "Humidity : " + humidity + " %";
                 document.getElementById('cloudiness').textContent = "Cloudiness : " + cloudiness + " %";
