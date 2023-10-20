@@ -25,35 +25,30 @@
     </style>
     <script>
         var callAPI = () => {
-    var cityName = document.getElementById('fName').value; // Ottieni il valore da "fName" input
+            var cityName = "Roma"; // Specifica la città desiderata
+            var url = 'URL_DEL_TUO_API_GATEWAY'; // Sostituisci con l'URL del tuo API Gateway
 
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    var raw = JSON.stringify({"cityName": cityName});
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-
-    fetch("https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
-    .then(response => response.text())
-    .then(result => {
-        var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
-        // Estrarre i singoli campi dalla risposta JSON
-        var cityName = data.cityName;
-        var temp = data.temp;
-        var humidity = data.humidity;
-        var cloudiness = data.cloudiness;
-
-        // Aggiorna gli elementi HTML con i dati estratti
-        document.getElementById('cityName').textContent = cityName;
-        document.getElementById('cloudiness').textContent = cloudiness;
-        document.getElementById('temp').textContent = temp;
-    })
-    .catch(error => console.error('Errore nella richiesta: ' + error));
-}
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({ cityName: cityName }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Utilizza i dati come desiderato
+                var temperature = data.temperature;
+                var humidity = data.humidity;
+                var cloudiness = data.cloudiness;
+        
+                // Esempio: aggiorna elementi HTML con i dati
+                document.getElementById('temperature').textContent = temperature + '°C';
+                document.getElementById('humidity').textContent = humidity + '%';
+                document.getElementById('cloudiness').textContent = cloudiness;
+            })
+            .catch(error => console.error('Errore nella richiesta: ' + error));
+        }
 
     </script>
 </head>
@@ -64,8 +59,8 @@
         <!-- set button onClick method to callAPI function -->
         <button type="button" onclick="callAPI()">Search</button>
     </form>
-    <div id="cityName" style="color: #ffffff;">cityName</div>
-    <div id="cloudiness" style="color: #ffffff;">cloudiness</div>
-    <div id="temp" style="color: #ffffff;">temp</div>
+    <div id="temperature" style="color: #ffffff;">cityName</div>
+    <div id="humidity" style="color: #ffffff;">cloudiness</div>
+    <div id="cloudiness" style="color: #ffffff;">temp</div>
 </body>
 </html>
