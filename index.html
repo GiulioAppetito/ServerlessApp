@@ -45,9 +45,9 @@
                 var cloudiness = data.cloudiness;
         
                 // Aggiorna gli elementi HTML con i dati estratti
-                document.getElementById('temperature').textContent = temp;
-                document.getElementById('humidity').textContent = humidity;
-                document.getElementById('cloudiness').textContent = cloudiness;
+                document.getElementById('temperature').textContent = "Temperature : " + temp;
+                document.getElementById('humidity').textContent = "Humidity : " + humidity;
+                document.getElementById('cloudiness').textContent = "Cloudiness : " + cloudiness;
             })
             .catch(error => console.error('Errore nella richiesta: ' + error));
         }
@@ -61,7 +61,7 @@
         <!-- set button onClick method to callAPI function -->
         <button type="button" onclick="callAPI()">Search</button>
     </form>
-    <div id="temperature" style="color: #ffffff;">cityName</div>
+    <div id="temperature" style="color: #ffffff;">temperature</div>
     <div id="humidity" style="color: #ffffff;">cloudiness</div>
     <div id="cloudiness" style="color: #ffffff;">temp</div>
 </body>
