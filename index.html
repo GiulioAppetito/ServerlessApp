@@ -25,8 +25,8 @@
     </style>
     <script>
         var callAPI = () => {
-            var cityName = "Roma"; // Specifica la città desiderata
-            var url = 'URL_DEL_TUO_API_GATEWAY'; // Sostituisci con l'URL del tuo API Gateway
+            var cityName = document.getElementById('fName').value;
+            var url = 'https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
 
             fetch(url, {
                 method: 'POST',
