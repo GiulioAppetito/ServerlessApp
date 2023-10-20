@@ -45,6 +45,7 @@
                 var cloudiness = data.cloudiness;
         
                 // Aggiorna gli elementi HTML con i dati estratti
+                document.getElementById('city').textContent = "City : " + cityName;
                 document.getElementById('temperature').textContent = "Temperature : " + temp;
                 document.getElementById('humidity').textContent = "Humidity : " + humidity;
                 document.getElementById('cloudiness').textContent = "Cloudiness : " + cloudiness;
@@ -61,6 +62,8 @@
         <!-- set button onClick method to callAPI function -->
         <button type="button" onclick="callAPI()">Search</button>
     </form>
+    <div id="city" style="color: #ffffff;">city</div>
+
     <div id="temperature" style="color: #ffffff;">temperature</div>
     <div id="humidity" style="color: #ffffff;">cloudiness</div>
     <div id="cloudiness" style="color: #ffffff;">temp</div>
