@@ -38,12 +38,6 @@
     </script>
 </head>
 <body>
-    <form>
-        <label>City Name :</label>
-        <input type="text" id="fName">
-        <!-- set button onClick method to callAPI function -->
-        <button type="button" onclick="callAPI()">Search</button>
-    </form>
     <body>
     <header>
         <h1>Cloudy Days</h1>
@@ -52,7 +46,7 @@
             <button class="rounded-button">Login</button>
             </a></p>
             <form id="search-form">
-                <input type="text" id="city-search" placeholder="Inserisci il nome della città">
+                <input type="text" id="fName" placeholder="Inserisci il nome della città">
             </form>
                 <p><a href=search>
                 <button class="rounded-button" type="submit">Search</button>
@@ -68,7 +62,7 @@
     
         <div class="today-card">
             <h2>Today</h2>
-            <img src="..\static\images\sun.png" alt="Nome della città">
+            <img src="..\static\images\sun.png">
             <p>City: <span class="temperature" id="cityName"></span></p>
             <p>Temp: <span class="temperature" id="temperature"></span></p>
             <p>Humidity: <span class="temperature" id="humidity"></span></p>
