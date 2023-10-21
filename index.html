@@ -24,13 +24,13 @@
                 var city = data.cityName;
                 var temp = data.temperature;
                 var humidity = data.humidity;
-                var cloudiness = data.cloudiness;
+                var weather = data.weather;
         
                 // Aggiorna gli elementi HTML con i dati estratti
                 document.getElementById('cityName').textContent = city;
                 document.getElementById('temperature').textContent = temp + "°C";
                 document.getElementById('humidity').textContent = humidity + "%";
-                document.getElementById('cloudiness').textContent = cloudiness;
+                document.getElementById('weather').textContent = weather;
                 
                 // Crea un nuovo oggetto Data
                 var dataCorrente = new Date();
@@ -75,7 +75,7 @@
             <p>City: <span class="temperature" id="cityName"></span></p>
             <p>Temp: <span class="temperature" id="temperature"></span></p>
             <p>Humidity: <span class="temperature" id="humidity"></span></p>
-            <p>Cloudiness: <span class="temperature" id="cloudiness"></span></p>
+            <p>Weather: <span class="temperature" id="weather"></span></p>
         </div>
         <div class="today-card">
             <p>Preferences</p>
