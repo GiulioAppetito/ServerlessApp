@@ -27,10 +27,10 @@
                 var cloudiness = data.cloudiness;
         
                 // Aggiorna gli elementi HTML con i dati estratti
-                document.getElementById('cityName').textContent = "City : " + city;
-                document.getElementById('temperature').textContent = "Temperature : " + temp + " °C";
-                document.getElementById('humidity').textContent = "Humidity : " + humidity + " %";
-                document.getElementById('cloudiness').textContent = "Cloudiness : " + cloudiness + " %";
+                document.getElementById('cityName').textContent = city;
+                document.getElementById('temperature').textContent = temp+"°C";
+                document.getElementById('humidity').textContent = humidity+"%";
+                document.getElementById('cloudiness').textContent = cloudiness + " %";
             })
             .catch(error => console.error('Errore nella richiesta: ' + error));
         }
