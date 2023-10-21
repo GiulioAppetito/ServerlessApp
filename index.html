@@ -2,27 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
-    <!-- Add some CSS to change client UI -->
-    <style>
-        body {
-            background-color: #232F3E;
-        }
-
-        label, button {
-            color: #FF9900;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 20px;
-            margin-left: 40px;
-        }
-
-        input {
-            color: #232F3E;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 20px;
-            margin-left: 20px;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\static\style.css">
+    <title>Cloudy Days - Previsioni Meteo</title>
     <script>
         var callAPI = () => {
             var cityName = document.getElementById('fName').value;
