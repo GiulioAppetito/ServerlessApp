@@ -28,9 +28,21 @@
         
                 // Aggiorna gli elementi HTML con i dati estratti
                 document.getElementById('cityName').textContent = city;
-                document.getElementById('temperature').textContent = temp+"°C";
-                document.getElementById('humidity').textContent = humidity+"%";
-                document.getElementById('cloudiness').textContent = cloudiness + " %";
+                document.getElementById('temperature').textContent = temp + "°C";
+                document.getElementById('humidity').textContent = humidity + "%";
+                document.getElementById('cloudiness').textContent = cloudiness;
+
+                // Cambia l'immagine in base a cloudiness
+                var todayCard = document.querySelector('.today-card');
+                var weatherImage = todayCard.querySelector('img');
+
+                if (cloudiness.includes('rain')) {
+                    weatherImage.src = 'static/cloudyrain.png';
+                } else if (cloudiness.includes('cloudy')) {
+                    weatherImage.src = 'static/cloudy.png';
+                } else if (cloudiness.includes('sun')) {
+                    weatherImage.src = 'static/sun.png';
+                }
 
                 // Crea un nuovo oggetto Data
                 var dataCorrente = new Date();
@@ -40,11 +52,10 @@
                 
                 // Ottieni l'ora corrente (formato: HH:MM:SS)
                 var ora = dataCorrente.toTimeString().slice(0, 8);
-                document.getElementById('todayDateTime').textContent = data+", "+ora;
+                document.getElementById('todayDateTime').textContent = data + ", " + ora;
             })
             .catch(error => console.error('Errore nella richiesta: ' + error));
         }
-
     </script>
 </head>
 <body>
@@ -72,7 +83,7 @@
     
         <div class="today-card">
             <h2 id='todayDateTime'>Today</h2>
-            <img src="..\static\sun.png">
+            <img src="" alt="Weather Image">
             <p>City: <span class="temperature" id="cityName"></span></p>
             <p>Temp: <span class="temperature" id="temperature"></span></p>
             <p>Humidity: <span class="temperature" id="humidity"></span></p>
@@ -110,7 +121,7 @@
             <img src="..\static\images\cloudy.png" alt="Nome della città">
             <p>Max temp: <span class="temperature">25°C</span></p>
         </div>
-        <div class="day-card">
+        <div class "day-card">
             <h2>Venerdì</h2>
             <img src="..\static\images\storm.png" alt="Nome della città">
             <p>Max temp: <span class="temperature">25°C</span></p>
@@ -138,12 +149,10 @@
             <p>Average temp: <span class="temperature">25°C</span></p>
             <p>Average temp: <span class="temperature">25°C</span></p>
         </div>
-    </h1>
     </section>
     
     <footer>
         <p>&copy; 2023 Cloudy Days</p>
     </footer>
-</body>
 </body>
 </html>
