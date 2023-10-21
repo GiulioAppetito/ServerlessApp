@@ -41,50 +41,7 @@
             })
             .catch(error => console.error('Errore nella richiesta: ' + error));
         }
-</script>
-
-    <script>
-        // La funzione che effettua la chiamata all'API
-        var forecastAPI = () => {
-            var cityName = document.getElementById('fName').value;
-            var url = 'URL_DEL_TUO_API'; // Sostituisci con l'URL del tuo API
-
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify({ cityName: cityName }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response => response.json()) // Analizza la risposta JSON
-            .then(data => {
-                // Estrai i dati
-                var cityName = data.cityName;
-                var dailyForecasts = data.dailyForecasts;
-
-                // Aggiorna il nome della città
-                document.getElementById('cityName').textContent = cityName;
-
-                // Loop attraverso le previsioni giornaliere e aggiorna le cards
-                dailyForecasts.forEach(function(forecast, index) {
-                    var date = forecast.date;
-                    var maxTemperature = forecast.max_temperature;
-                    var minTemperature = forecast.min_temperature;
-                    var humidity = forecast.humidity;
-                    var cloudiness = forecast.cloudiness;
-
-                    // Aggiorna le cards dei vari giorni
-                    var dayCard = document.getElementById('day' + index);
-                    dayCard.querySelector('.date').textContent = date;
-                    dayCard.querySelector('.max-temp').textContent = maxTemperature + '°C';
-                    dayCard.querySelector('.min-temp').textContent = minTemperature + '°C';
-                    dayCard.querySelector('.humidity').textContent = humidity + '%';
-                    dayCard.querySelector('.cloudiness').textContent = cloudiness;
-                });
-            })
-            .catch(error => console.error('Errore nella richiesta: ' + error));
-        }
-    </script>
+    </script>    
     <script>
         var callAPI = () => {
             var cityName = document.getElementById('fName').value;
