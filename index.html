@@ -6,6 +6,86 @@
     <link rel="stylesheet" type="text/css" href="static/style.css">
     <title>Cloudy Days - Previsioni Meteo</title>
     <script>
+        var forecastAPI = () => {
+            var cityName = document.getElementById('fName').value;
+            var url = 'URL_DEL_TUO_API'; // Sostituisci con l'URL del tuo API
+    
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({ cityName: cityName }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Estrai le previsioni giornaliere
+                var dailyForecasts = data.dailyForecasts;
+    
+                // Loop attraverso le previsioni e aggiorna le cards
+                dailyForecasts.forEach(function(forecast, index) {
+                    var date = forecast.date;
+                    var maxTemperature = forecast.max_temperature;
+                    var minTemperature = forecast.min_temperature;
+                    var humidity = forecast.humidity;
+                    var cloudiness = forecast.cloudiness;
+    
+                    // Aggiorna le cards dei vari giorni
+                    var dayCard = document.getElementById('day' + index);
+                    dayCard.querySelector('.date').textContent = date;
+                    dayCard.querySelector('.max-temp').textContent = 'Max temp: ' + maxTemperature + '°C';
+                    dayCard.querySelector('.min-temp').textContent = 'Min temp: ' + minTemperature + '°C';
+                    dayCard.querySelector('.humidity').textContent = 'Humidity: ' + humidity + '%';
+                    dayCard.querySelector('.weather').textContent = 'Weather: ' + cloudiness;
+                });
+            })
+            .catch(error => console.error('Errore nella richiesta: ' + error));
+        }
+</script>
+
+    <script>
+        // La funzione che effettua la chiamata all'API
+        var forecastAPI = () => {
+            var cityName = document.getElementById('fName').value;
+            var url = 'URL_DEL_TUO_API'; // Sostituisci con l'URL del tuo API
+
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({ cityName: cityName }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json()) // Analizza la risposta JSON
+            .then(data => {
+                // Estrai i dati
+                var cityName = data.cityName;
+                var dailyForecasts = data.dailyForecasts;
+
+                // Aggiorna il nome della città
+                document.getElementById('cityName').textContent = cityName;
+
+                // Loop attraverso le previsioni giornaliere e aggiorna le cards
+                dailyForecasts.forEach(function(forecast, index) {
+                    var date = forecast.date;
+                    var maxTemperature = forecast.max_temperature;
+                    var minTemperature = forecast.min_temperature;
+                    var humidity = forecast.humidity;
+                    var cloudiness = forecast.cloudiness;
+
+                    // Aggiorna le cards dei vari giorni
+                    var dayCard = document.getElementById('day' + index);
+                    dayCard.querySelector('.date').textContent = date;
+                    dayCard.querySelector('.max-temp').textContent = maxTemperature + '°C';
+                    dayCard.querySelector('.min-temp').textContent = minTemperature + '°C';
+                    dayCard.querySelector('.humidity').textContent = humidity + '%';
+                    dayCard.querySelector('.cloudiness').textContent = cloudiness;
+                });
+            })
+            .catch(error => console.error('Errore nella richiesta: ' + error));
+        }
+    </script>
+    <script>
         var callAPI = () => {
             var cityName = document.getElementById('fName').value;
             var url = 'https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
@@ -89,40 +169,69 @@
         <p>Check out weather forecast for the next 7 days.</p>
     </section>
     <section class="weather-container">
-        <div class="day-card" id="lunedì">
-            <h2>Lunedì</h2>
+        <button class="rounded-button" type="submit" onclick="forecastAPI()">Forecast</button>
+        <div class="day-card" id="day0">
+            <h2 id="date">Lunedì</h2>
             <img src="..\static\images\storm.png" alt="Nome della città">
-            <p>Max temp: <span class="temperature">25°C</span></p>
+            <p>City: <span class="temperature" id="cityName"></span></p>
+            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
+            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
+            <p>Humidity: <span class="temperature" id="humidity"></span></p>
+            <p>Weather: <span class="temperature" id="weather"></span></p>
         </div>
-        <div class="day-card" id="'martedì">
-            <h2>Martedì</h2>
-            <img src="..\static\images\cloudy.png" alt="Nome della città">
-            <p>Max temp: <span class="temperature">22°C</span></p>
-        </div>
-        <div class="day-card">
-            <h2>Mercoledì</h2>
-            <img src="..\static\images\sun.png" alt="Nome della città">
-            <p>Max temp: <span class="temperature">24°C</span></p>
-        </div>
-        <div class="day-card">
-            <h2>Giovedì</h2>
-            <img src="..\static\images\cloudy.png" alt="Nome della città">
-            <p>Max temp: <span class="temperature">25°C</span></p>
-        </div>
-        <div class "day-card">
-            <h2>Venerdì</h2>
+        <div class="day-card" id="day1">
+            <h2 id="date">Lunedì</h2>
             <img src="..\static\images\storm.png" alt="Nome della città">
-            <p>Max temp: <span class="temperature">25°C</span></p>
+            <p>City: <span class="temperature" id="cityName"></span></p>
+            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
+            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
+            <p>Humidity: <span class="temperature" id="humidity"></span></p>
+            <p>Weather: <span class="temperature" id="weather"></span></p>
         </div>
-        <div class="day-card">
-            <h2>Sabato</h2>
-            <img src="..\static\images\sun.png" alt="Nome della città">
-            <p>Max temp: <span class="temperature">25°C</span></p>
+        <div class="day-card" id="day2">
+            <h2 id="date">Lunedì</h2>
+            <img src="..\static\images\storm.png" alt="Nome della città">
+            <p>City: <span class="temperature" id="cityName"></span></p>
+            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
+            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
+            <p>Humidity: <span class="temperature" id="humidity"></span></p>
+            <p>Weather: <span class="temperature" id="weather"></span></p>
         </div>
-        <div class="day-card">
-            <h2>Domenica</h2>
-            <img src="..\static\images\cloudyrain.png" alt="Nome della città"> 
-            <p>Max temp: <span class="temperature">25°C</span></p>
+        <div class="day-card" id="day3">
+            <h2 id="date">Lunedì</h2>
+            <img src="..\static\images\storm.png" alt="Nome della città">
+            <p>City: <span class="temperature" id="cityName"></span></p>
+            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
+            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
+            <p>Humidity: <span class="temperature" id="humidity"></span></p>
+            <p>Weather: <span class="temperature" id="weather"></span></p>
+        </div>
+        <div class="day-card" id="day4">
+            <h2 id="date">Lunedì</h2>
+            <img src="..\static\images\storm.png" alt="Nome della città">
+            <p>City: <span class="temperature" id="cityName"></span></p>
+            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
+            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
+            <p>Humidity: <span class="temperature" id="humidity"></span></p>
+            <p>Weather: <span class="temperature" id="weather"></span></p>
+        </div>
+        <div class="day-card" id="day5">
+            <h2 id="date">Lunedì</h2>
+            <img src="..\static\images\storm.png" alt="Nome della città">
+            <p>City: <span class="temperature" id="cityName"></span></p>
+            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
+            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
+            <p>Humidity: <span class="temperature" id="humidity"></span></p>
+            <p>Weather: <span class="temperature" id="weather"></span></p>
+        </div>
+        <div class="day-card" id="day6">
+            <h2 id="date">Lunedì</h2>
+            <img src="..\static\images\storm.png" alt="Nome della città">
+            <p>City: <span class="temperature" id="cityName"></span></p>
+            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
+            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
+            <p>Humidity: <span class="temperature" id="humidity"></span></p>
+            <p>Weather: <span class="temperature" id="weather"></span></p>
         </div>
         <!-- Ripeti lo stesso modello per gli altri giorni della settimana -->
     </section>
