@@ -27,7 +27,7 @@
                 var cloudiness = data.cloudiness;
         
                 // Aggiorna gli elementi HTML con i dati estratti
-                document.getElementById('city').textContent = "City : " + city;
+                document.getElementById('cityName').textContent = "City : " + city;
                 document.getElementById('temperature').textContent = "Temperature : " + temp + " °C";
                 document.getElementById('humidity').textContent = "Humidity : " + humidity + " %";
                 document.getElementById('cloudiness').textContent = "Cloudiness : " + cloudiness + " %";
@@ -67,7 +67,7 @@
     <section class="weather-container">
     
         <div class="today-card">
-            <h2>Lunedì</h2>
+            <h2>Today</h2>
             <img src="..\static\images\sun.png" alt="Nome della città">
             <p>City: <span class="temperature" id="cityName"></span></p>
             <p>Temp: <span class="temperature" id="temperature"></span></p>
