@@ -31,19 +31,7 @@
                 document.getElementById('temperature').textContent = temp + "°C";
                 document.getElementById('humidity').textContent = humidity + "%";
                 document.getElementById('cloudiness').textContent = cloudiness;
-
-                // Cambia l'immagine in base a cloudiness
-                var todayCard = document.querySelector('.today-card');
-                var weatherImage = todayCard.querySelector('img');
-
-                if (cloudiness.includes('rain') or (cloudiness.includes('storm')) {
-                    weatherImage.src = 'static/cloudyrain.png';
-                } else if (cloudiness.includes('cloud')) {
-                    weatherImage.src = 'static/cloudy.png';
-                } else if (cloudiness.includes('sun') or (cloudiness.includes('clear')) {
-                    weatherImage.src = 'static/sun.png';
-                }
-
+                
                 // Crea un nuovo oggetto Data
                 var dataCorrente = new Date();
 
