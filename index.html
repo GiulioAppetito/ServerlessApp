@@ -39,11 +39,11 @@
             var dayCard = document.getElementById(dayCardId);
 
             // Aggiorna le informazioni all'interno dell'elemento HTML
-            dayCard.querySelector('.date').textContent = date;
-            dayCard.querySelector('.max-temp').textContent = 'Max temp: ' + maxTemperature + '°C';
-            dayCard.querySelector('.min-temp').textContent = 'Min temp: ' + minTemperature + '°C';
-            dayCard.querySelector('.humidity').textContent = 'Humidity: ' + humidity + '%';
-            dayCard.querySelector('.weather').textContent = 'Weather: ' + weather;
+            dayCard.querySelector('.date').textContent = 'a';
+            dayCard.querySelector('.max-temp').textContent = 'Max temp: ' + '0' + '°C';
+            dayCard.querySelector('.min-temp').textContent = 'Min temp: ' + '1' + '°C';
+            dayCard.querySelector('.humidity').textContent = 'Humidity: ' + '2' + '%';
+            dayCard.querySelector('.weather').textContent = 'Weather: ' + 'ok';
         });
     })
     .catch(error => console.error('Errore nella richiesta: ' + error));
