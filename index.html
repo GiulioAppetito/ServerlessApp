@@ -7,33 +7,46 @@
     <title>Cloudy Days - Previsioni Meteo</title>
     <script>
     var forecastAPI = () => {
-        var cityName = document.getElementById('fName').value;
-        var url = 'https://or8dml27g0.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API
+    var cityName = document.getElementById('fName').value;
+    var url = 'URL_DEL_TUO_API'; // Sostituisci con l'URL del tuo API
 
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify({ cityName: cityName }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            var dailyForecasts = data.dailyForecasts;
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({ cityName: cityName }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        var dailyForecasts = data.dailyForecasts;
 
-            // Aggiorna la prima card
-            var day0 = document.getElementById('day0');
-            day0.querySelector('.date').textContent = dailyForecasts[0].date;
-            day0.querySelector('.max-temp').textContent = 'Max temp: ' + dailyForecasts[0].max_temperature + '°C';
-            day0.querySelector('.min-temp').textContent = 'Min temp: ' + dailyForecasts[0].min_temperature + '°C';
-            day0.querySelector('.humidity').textContent = 'Humidity: ' + dailyForecasts[0].humidity + '%';
-            day0.querySelector('.weather').textContent = 'Weather: ' + dailyForecasts[0].cloudiness;
+        // Loop attraverso le previsioni e aggiorna le cards
+        dailyForecasts.forEach(function(forecast, index) {
+            // Costruisci l'ID dell'elemento HTML corrispondente
+            var dayCardId = 'day' + index;
 
-            // Ripeti per le altre cards...
+            // Estrarre i dati dalla risposta
+            var date = forecast.date;
+            var maxTemperature = forecast.max_temperature;
+            var minTemperature = forecast.min_temperature;
+            var humidity = forecast.humidity;
+            var weather = forecast.cloudiness; // Assumo che il campo sia "cloudiness"
 
-        })
-        .catch(error => console.error('Errore nella richiesta: ' + error));
-    }
+            // Seleziona l'elemento HTML corrispondente
+            var dayCard = document.getElementById(dayCardId);
+
+            // Aggiorna le informazioni all'interno dell'elemento HTML
+            dayCard.querySelector('.date').textContent = date;
+            dayCard.querySelector('.max-temp').textContent = 'Max temp: ' + maxTemperature + '°C';
+            dayCard.querySelector('.min-temp').textContent = 'Min temp: ' + minTemperature + '°C';
+            dayCard.querySelector('.humidity').textContent = 'Humidity: ' + humidity + '%';
+            dayCard.querySelector('.weather').textContent = 'Weather: ' + weather;
+        });
+    })
+    .catch(error => console.error('Errore nella richiesta: ' + error));
+}
+
 </script>
 
 
