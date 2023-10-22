@@ -19,35 +19,23 @@
         })
         .then(response => response.json())
         .then(data => {
-            // Estrai le previsioni giornaliere
             var dailyForecasts = data.dailyForecasts;
 
             // Aggiorna la prima card
-            updateDayCard('day0', dailyForecasts[0]);
+            var day0 = document.getElementById('day0');
+            day0.querySelector('.date').textContent = dailyForecasts[0].date;
+            day0.querySelector('.max-temp').textContent = 'Max temp: ' + dailyForecasts[0].max_temperature + '°C';
+            day0.querySelector('.min-temp').textContent = 'Min temp: ' + dailyForecasts[0].min_temperature + '°C';
+            day0.querySelector('.humidity').textContent = 'Humidity: ' + dailyForecasts[0].humidity + '%';
+            day0.querySelector('.weather').textContent = 'Weather: ' + dailyForecasts[0].cloudiness;
 
-            // Aggiorna la seconda card
-            updateDayCard('day1', dailyForecasts[1]);
+            // Ripeti per le altre cards...
 
-            // E così via per le altre cards 
         })
         .catch(error => console.error('Errore nella richiesta: ' + error));
     }
-
-    function updateDayCard(cardId, forecast) {
-        var date = forecast.date;
-        var maxTemperature = forecast.max_temperature;
-        var minTemperature = forecast.min_temperature;
-        var humidity = forecast.humidity;
-        var weather = forecast.weather;
-
-        var dayCard = document.getElementById(cardId);
-        dayCard.querySelector('.date').textContent = date;
-        dayCard.querySelector('.max-temp').textContent = 'Max temp: ' + maxTemperature + '°C';
-        dayCard.querySelector('.min-temp').textContent = 'Min temp: ' + minTemperature + '°C';
-        dayCard.querySelector('.humidity').textContent = 'Humidity: ' + humidity + '%';
-        dayCard.querySelector('.weather').textContent = 'Weather: ' + weather;
-    }
 </script>
+
 
 
     <script>
