@@ -8,7 +8,7 @@
     <script>
     var forecastAPI = () => {
         var cityName = document.getElementById('fName').value;
-        var url = 'https://or8dml27g0.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API
+        var url = 'URL_DEL_TUO_API'; // Sostituisci con l'URL del tuo API
 
         fetch(url, {
             method: 'POST',
@@ -22,30 +22,33 @@
             // Estrai le previsioni giornaliere
             var dailyForecasts = data.dailyForecasts;
 
-            // Loop attraverso le previsioni e aggiorna le cards
-            dailyForecasts.forEach(function(forecast, index) {
-                // Costruisci l'ID dell'elemento HTML corrispondente
-                var dayCardId = 'day' + index;
-                var date = forecast.date;
-                var maxTemperature = forecast.max_temperature;
-                var minTemperature = forecast.min_temperature;
-                var humidity = forecast.humidity;
-                var weather = forecast.weather;
+            // Aggiorna la prima card
+            updateDayCard('day0', dailyForecasts[0]);
 
-                // Seleziona l'elemento HTML corrispondente
-                var dayCard = document.getElementById(dayCardId);
+            // Aggiorna la seconda card
+            updateDayCard('day1', dailyForecasts[1]);
 
-                // Aggiorna le informazioni all'interno dell'elemento HTML
-                dayCard.querySelector('.date').textContent = date;
-                dayCard.querySelector('.max-temp').textContent = 'Max temp: ' + maxTemperature + '°C';
-                dayCard.querySelector('.min-temp').textContent = 'Min temp: ' + minTemperature + '°C';
-                dayCard.querySelector('.humidity').textContent = 'Humidity: ' + humidity + '%';
-                dayCard.querySelector('.weather').textContent = 'Weather: ' + weather;
-            });
+            // E così via per le altre cards
         })
         .catch(error => console.error('Errore nella richiesta: ' + error));
     }
+
+    function updateDayCard(cardId, forecast) {
+        var date = forecast.date;
+        var maxTemperature = forecast.max_temperature;
+        var minTemperature = forecast.min_temperature;
+        var humidity = forecast.humidity;
+        var weather = forecast.weather;
+
+        var dayCard = document.getElementById(cardId);
+        dayCard.querySelector('.date').textContent = date;
+        dayCard.querySelector('.max-temp').textContent = 'Max temp: ' + maxTemperature + '°C';
+        dayCard.querySelector('.min-temp').textContent = 'Min temp: ' + minTemperature + '°C';
+        dayCard.querySelector('.humidity').textContent = 'Humidity: ' + humidity + '%';
+        dayCard.querySelector('.weather').textContent = 'Weather: ' + weather;
+    }
 </script>
+
 
     <script>
         var callAPI = () => {
