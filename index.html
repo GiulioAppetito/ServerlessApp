@@ -68,35 +68,56 @@
     </script>
 </head>
 <body>
-    <body>
     <header>
         <h1>Cloudy Days</h1>
-        <section>
-            <p><a href=loginpage>
-            <button class="rounded-button">Login</button>
+        <section class="right-text">
+
+            <div class="mb-3">
+                <label id="lab1" for="inputUsername" class="form-label">Username:</label>
+                <input class="form-control" type="text" id="username" name="inputUsername" rows="1" required>{{ request.form['inputUsername'] }}
+                <label id="lab2" for="InputPassword">Password:</label>
+                <input class="form-control" type="password" id="password" name="inputPassword" required>{{ request.form['inputPassword'] }}
+            </div>
+
+            <p><a action="/login" method="POST">
+            <button class="rounded-button" id="login_btn" onclick="hideButton()">Login</button>
             </a></p>
-            <form id="search-form">
-                <input type="text" id="fName" placeholder="Inserisci il nome della città">
-            </form>
-                <p>
-                <button class="rounded-button" type="submit" onclick="callAPI()">Search</button>
-                </p>
-            <b style="font-size: 25px">{{ username }}</b>
+            
+            <label id="lab3" class="form-label" style='display:none'>{{ username }}</label>
+            <p><a action="/logout" method="POST">
+            <button class="rounded-button" id="logout_btn" style='display:none' onclick="showLoginForm()">Logout</button>
+            </a></p>
+
         </section>
     </header>
     <section class="container-title">
-        <h2>Today</h2>
-        <p>Check out today's weather.</p>
+        <div>
+            <h2>Today</h2>
+            <p>Check out today's weather.</p>
+        </div>
+        <form action="/search" method="POST">
+            <div class="mb-3">
+                <section class="right-text">
+                    
+                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
+                    
+                        <p><a href=search>
+                        <button class="rounded-button" type="submit">Search</button>
+                        </a></p>
+                    
+                </section>
+            </div>
+        </form>
     </section>
     <section class="weather-container">
     
         <div class="today-card">
-            <h2 id='todayDateTime'>Today</h2>
-            <img src="" alt="Weather Image">
-            <p>City: <span class="temperature" id="cityName"></span></p>
-            <p>Temp: <span class="temperature" id="temperature"></span></p>
-            <p>Humidity: <span class="temperature" id="humidity"></span></p>
-            <p>Weather: <span class="temperature" id="weather"></span></p>
+            <h2>Lunedì</h2>
+            <b style="font-size: 25px">{{ city }}</b>
+            <img src="..\static\images\sun.png">
+            <p>Temp: <span class="temperature">{{ temp }}</span></p>
+            <p>Humidity: <span class="temperature">{{ hum }}</span></p>
+            <p>Cloudiness: <span class="temperature">{{ cloud }}</span></p>
         </div>
         <div class="today-card">
             <p>Preferences</p>
@@ -110,69 +131,40 @@
         <p>Check out weather forecast for the next 7 days.</p>
     </section>
     <section class="weather-container">
-        <button class="rounded-button" type="submit" onclick="forecastAPI()">Forecast</button>
-        <div class="day-card" id="day0">
-            <h2 id="date">Lunedì</h2>
+        <div class="day-card" id="lunedì">
+            <h2>Lunedì</h2>
             <img src="..\static\images\storm.png" alt="Nome della città">
-            <p>City: <span class="temperature" id="cityName"></span></p>
-            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
-            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
-            <p>Humidity: <span class="temperature" id="humidity"></span></p>
-            <p>Weather: <span class="temperature" id="weather"></span></p>
+            <p>Max temp: <span class="temperature">25°C</span></p>
         </div>
-        <div class="day-card" id="day1">
-            <h2 id="date">Lunedì</h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
-            <p>City: <span class="temperature" id="cityName"></span></p>
-            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
-            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
-            <p>Humidity: <span class="temperature" id="humidity"></span></p>
-            <p>Weather: <span class="temperature" id="weather"></span></p>
+        <div class="day-card" id="'martedì">
+            <h2>Martedì</h2>
+            <img src="..\static\images\cloudy.png" alt="Nome della città">
+            <p>Max temp: <span class="temperature">22°C</span></p>
         </div>
-        <div class="day-card" id="day2">
-            <h2 id="date">Lunedì</h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
-            <p>City: <span class="temperature" id="cityName"></span></p>
-            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
-            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
-            <p>Humidity: <span class="temperature" id="humidity"></span></p>
-            <p>Weather: <span class="temperature" id="weather"></span></p>
+        <div class="day-card">
+            <h2>Mercoledì</h2>
+            <img src="..\static\images\sun.png" alt="Nome della città">
+            <p>Max temp: <span class="temperature">24°C</span></p>
         </div>
-        <div class="day-card" id="day3">
-            <h2 id="date">Lunedì</h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
-            <p>City: <span class="temperature" id="cityName"></span></p>
-            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
-            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
-            <p>Humidity: <span class="temperature" id="humidity"></span></p>
-            <p>Weather: <span class="temperature" id="weather"></span></p>
+        <div class="day-card">
+            <h2>Giovedì</h2>
+            <img src="..\static\images\cloudy.png" alt="Nome della città">
+            <p>Max temp: <span class="temperature">25°C</span></p>
         </div>
-        <div class="day-card" id="day4">
-            <h2 id="date">Lunedì</h2>
+        <div class="day-card">
+            <h2>Venerdì</h2>
             <img src="..\static\images\storm.png" alt="Nome della città">
-            <p>City: <span class="temperature" id="cityName"></span></p>
-            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
-            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
-            <p>Humidity: <span class="temperature" id="humidity"></span></p>
-            <p>Weather: <span class="temperature" id="weather"></span></p>
+            <p>Max temp: <span class="temperature">25°C</span></p>
         </div>
-        <div class="day-card" id="day5">
-            <h2 id="date">Lunedì</h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
-            <p>City: <span class="temperature" id="cityName"></span></p>
-            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
-            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
-            <p>Humidity: <span class="temperature" id="humidity"></span></p>
-            <p>Weather: <span class="temperature" id="weather"></span></p>
+        <div class="day-card">
+            <h2>Sabato</h2>
+            <img src="..\static\images\sun.png" alt="Nome della città">
+            <p>Max temp: <span class="temperature">25°C</span></p>
         </div>
-        <div class="day-card" id="day6">
-            <h2 id="date">Lunedì</h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
-            <p>City: <span class="temperature" id="cityName"></span></p>
-            <p>Min-temp: <span class="temperature" id="min-temp"></span></p>
-            <p>Max-temp: <span class="temperature" id="max-temp"></span></p>
-            <p>Humidity: <span class="temperature" id="humidity"></span></p>
-            <p>Weather: <span class="temperature" id="weather"></span></p>
+        <div class="day-card">
+            <h2>Domenica</h2>
+            <img src="..\static\images\cloudyrain.png" alt="Nome della città">
+            <p>Max temp: <span class="temperature">25°C</span></p>
         </div>
         <!-- Ripeti lo stesso modello per gli altri giorni della settimana -->
     </section>
@@ -187,6 +179,7 @@
             <p>Average temp: <span class="temperature">25°C</span></p>
             <p>Average temp: <span class="temperature">25°C</span></p>
         </div>
+    </h1>
     </section>
     
     <footer>
