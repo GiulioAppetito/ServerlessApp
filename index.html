@@ -43,7 +43,7 @@
                 var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
                 // Estrarre i singoli campi dalla risposta JSON
                 var city = data.cityName;
-                var temp = data.max_temperature;
+                var temp = data.temperature;
                 var humidity = data.humidity;
                 var weather = data.weather;
         
@@ -114,6 +114,7 @@
         <div class="today-card">
             <h2>Today</h2>
             <b style="font-size: 25px" id="cityName"></b>
+            <p>Temp: <span class="temperature" id="todayDateTime"></span></p>
             <img src="..\static\images\sun.png">
             <p>Temp: <span class="temperature" id="temperature"></span></p>
             <p>Humidity: <span class="temperature" id="humidity"></span></p>
