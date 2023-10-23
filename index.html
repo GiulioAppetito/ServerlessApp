@@ -7,43 +7,46 @@
     <title>Cloudy Days - Previsioni Meteo</title>
     <script>
         var forecastAPI = () => {
-            var cityName = document.getElementById('city-search-forecast').value;
-            var url = 'https://or8dml27g0.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
+    var cityName = document.getElementById('city-search-forecast').value;
+    var url = 'https://or8dml27g0.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
 
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify({ cityName: cityName }), 
-                headers: {
-                    'Content-Type': 'application/json', 
-                },
-            })
-            .then(response => response.text())
-            .then(result => {
-                var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
-                // Estrarre i singoli campi dalla risposta JSON
-                var city = data.cityName;
-                var temp = data.temperature;
-                var humidity = data.humidity;
-                var weather = data.weather;
-        
-                // Aggiorna gli elementi HTML con i dati estratti 
-                document.getElementById('cityName').textContent = city;
-                document.getElementById('temperature').textContent = temp + "°C";
-                document.getElementById('humidity').textContent = humidity + "%";
-                document.getElementById('weather').textContent = weather;
-                
-                // Crea un nuovo oggetto Data
-                var dataCorrente = new Date();
+    fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({ cityName: cityName }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json()) // Analizza la risposta JSON direttamente come oggetto JavaScript
+    .then(data => {
+        // Estrarre i singoli campi dalla risposta JSON
+        var city = data[0].cityName;
+        var max_temp = data[0].max_temperature;
+        var min_temp = data[0].min_temperature;
+        var humidity = data[0].humidity;
+        var weather = data[0].weather;
 
-                // Ottieni la data corrente (formato: YYYY-MM-DD)
-                var data = dataCorrente.toISOString().slice(0, 10);
-                
-                // Ottieni l'ora corrente (formato: HH:MM:SS)
-                var ora = dataCorrente.toTimeString().slice(0, 8);
-                document.getElementById('todayDateTime').textContent = data + ", " + ora;
-            })
-            .catch(error => console.error('Errore nella richiesta: ' + error));
-        }
+        // Aggiorna gli elementi HTML con i dati estratti
+        document.getElementById('cityName0').textContent = city;
+        document.getElementById('max_temp0').textContent = temp + "°C";
+        document.getElementById('min_temp0').textContent = humidity + "%";
+        document.getElementById('weather0').textContent = weather;
+        document.getElementById('humidity0').textContent = weather;
+        document.getElementById('wind_speed0').textContent = weather;
+
+        // Crea un nuovo oggetto Data
+        var dataCorrente = new Date();
+
+        // Ottieni la data corrente (formato: YYYY-MM-DD)
+        var dataOdierna = dataCorrente.toISOString().slice(0, 10);
+
+        // Ottieni l'ora corrente (formato: HH:MM:SS)
+        var ora = dataCorrente.toTimeString().slice(0, 8);
+        document.getElementById('date0').textContent = dataOdierna + ", " + ora;
+    })
+    .catch(error => console.error('Errore nella richiesta: ' + error));
+}
+
     </script>
     <script>
         var callAPI = () => {
@@ -157,9 +160,13 @@
     </section>
     <section class="weather-container">
         <div class="day-card" id="lunedì">
-            <h2>Lunedì</h2>
+            <h2 id='date0'></h2>
             <img src="..\static\images\storm.png" alt="Nome della città">
-            <p>Max temp: <span class="temperature">25°C</span></p>
+            <p>Max temp: <span class="temperature" id='max_temp0'></span></p>
+            <p>Min temp: <span class="temperature" id='min_temp0'></span></p>
+            <p>Wind speed: <span class="temperature" id='wind_speed0'></span></p>
+            <p>Humidity: <span class="temperature" id='humidity0'></span></p>
+            <p>Weather: <span class="temperature" id='weather0'></span></p>
         </div>
         <div class="day-card" id="'martedì">
             <h2>Martedì</h2>
