@@ -7,24 +7,43 @@
     <title>Cloudy Days - Previsioni Meteo</title>
     <script>
         var forecastAPI = () => {
-        var cityName = document.getElementById('fName').value;
-        var url = 'https://or8dml27g0.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway AWS
-    
-        fetch(url, {
-            method: 'GET' // Cambia il metodo in GET se l'API accetta richieste GET
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Analizza i dati della risposta e aggiorna i card dei giorni
-            for (var i = 0; i < data.length; i++) {
-                var dayCard = document.getElementById('day' + i);
-                dayCard.querySelector('h2').textContent = data[i].date;
-                // Aggiungi il codice per aggiornare gli altri campi (min-temp, max-temp, humidity, weather)
-            }
-        })
-        .catch(error => console.error('Errore nella richiesta: ' + error));
-    }
+            var cityName = document.getElementById('city-search-forecast').value;
+            var url = 'https://or8dml27g0.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
 
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({ cityName: cityName }), 
+                headers: {
+                    'Content-Type': 'application/json', 
+                },
+            })
+            .then(response => response.text())
+            .then(result => {
+                var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
+                // Estrarre i singoli campi dalla risposta JSON
+                var city = data.cityName;
+                var temp = data.temperature;
+                var humidity = data.humidity;
+                var weather = data.weather;
+        
+                // Aggiorna gli elementi HTML con i dati estratti 
+                document.getElementById('cityName').textContent = city;
+                document.getElementById('temperature').textContent = temp + "°C";
+                document.getElementById('humidity').textContent = humidity + "%";
+                document.getElementById('weather').textContent = weather;
+                
+                // Crea un nuovo oggetto Data
+                var dataCorrente = new Date();
+
+                // Ottieni la data corrente (formato: YYYY-MM-DD)
+                var data = dataCorrente.toISOString().slice(0, 10);
+                
+                // Ottieni l'ora corrente (formato: HH:MM:SS)
+                var ora = dataCorrente.toTimeString().slice(0, 8);
+                document.getElementById('todayDateTime').textContent = data + ", " + ora;
+            })
+            .catch(error => console.error('Errore nella richiesta: ' + error));
+        }
     </script>
     <script>
         var callAPI = () => {
@@ -128,9 +147,9 @@
         <p>Check out weather forecast for the next 7 days.</p>
         <form>
                 <section>
-                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
+                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search-forecast" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
                         <p>
-                        <button class="rounded-button" type="button" onclick="callAPI()">Search</button>
+                        <button class="rounded-button" type="button" onclick="forecastAPI()">Search</button>
                         </p> 
                 </section>
             
@@ -179,7 +198,7 @@
         <p>Check out weather statistics for the past 14 days.</p>
         <form>
                 <section>
-                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
+                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search-past" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
                         <p>
                         <button class="rounded-button" type="button" onclick="callAPI()">Search</button>
                         </p> 
