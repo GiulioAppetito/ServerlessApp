@@ -28,7 +28,7 @@
     </script>
     <script>
         var callAPI = () => {
-            var cityName = document.getElementById('fName').value;
+            var cityName = document.getElementById('city-search').value;
             var url = 'https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
 
             fetch(url, {
@@ -102,7 +102,7 @@
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
                     
                         <p><a href=search>
-                        <button class="rounded-button" type="submit">Search</button>
+                        <button class="rounded-button" type="submit" onclick="callAPI()">Search</button>
                         </a></p>
                     
                 </section>
@@ -112,12 +112,12 @@
     <section class="weather-container">
     
         <div class="today-card">
-            <h2>Lunedì</h2>
-            <b style="font-size: 25px">{{ city }}</b>
+            <h2>Today</h2>
+            <b style="font-size: 25px" id="cityName"></b>
             <img src="..\static\images\sun.png">
-            <p>Temp: <span class="temperature">{{ temp }}</span></p>
-            <p>Humidity: <span class="temperature">{{ hum }}</span></p>
-            <p>Cloudiness: <span class="temperature">{{ cloud }}</span></p>
+            <p>Temp: <span class="temperature" id="temperature"></span></p>
+            <p>Humidity: <span class="temperature" id="humidity"></span></p>
+            <p>Weather: <span class="temperature" id="weather"></span></p>
         </div>
         <div class="today-card">
             <p>Preferences</p>
