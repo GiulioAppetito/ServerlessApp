@@ -40,7 +40,7 @@
             })
             .then(response => response.text())
             .then(result => {
-                var data = JSON.parse(result).body; // Analizza il corpo della risposta come JSON
+                var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
                 // Estrarre i singoli campi dalla risposta JSON
                 var city = data.cityName;
                 var temp = data.temperature;
