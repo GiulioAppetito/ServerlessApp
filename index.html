@@ -43,7 +43,7 @@
                 var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
                 // Estrarre i singoli campi dalla risposta JSON
                 var city = data.cityName;
-                var temp = data.temperature;
+                var temp = data.max_temperature;
                 var humidity = data.humidity;
                 var weather = data.weather;
         
@@ -101,7 +101,7 @@
                     
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
                     
-                        <p><a href=search>
+                        <p>
                         <button class="rounded-button" type="submit" onclick="callAPI()">Search</button>
                         </a></p>
                     
