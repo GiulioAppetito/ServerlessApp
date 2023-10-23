@@ -97,13 +97,10 @@
         </div>
         <form>
                 <section>
-                    
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
-                    
                         <p>
                         <button class="rounded-button" type="button" onclick="callAPI()">Search</button>
-                        </p>
-                    
+                        </p> 
                 </section>
             
         </form>
@@ -129,6 +126,15 @@
     <section class="container-title">
         <h2>Forecast</h2>
         <p>Check out weather forecast for the next 7 days.</p>
+        <form>
+                <section>
+                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
+                        <p>
+                        <button class="rounded-button" type="button" onclick="callAPI()">Search</button>
+                        </p> 
+                </section>
+            
+        </form>
     </section>
     <section class="weather-container">
         <div class="day-card" id="lunedì">
@@ -171,6 +177,15 @@
     <section class="container-title">
         <h2>Statistics</h2>
         <p>Check out weather statistics for the past 14 days.</p>
+        <form>
+                <section>
+                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
+                        <p>
+                        <button class="rounded-button" type="button" onclick="callAPI()">Search</button>
+                        </p> 
+                </section>
+            
+        </form>
     </section>
     <section class="weather-container">
         <div class="stats-card">
