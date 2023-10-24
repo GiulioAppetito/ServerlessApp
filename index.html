@@ -244,10 +244,8 @@
         <p>Check out weather forecast for the next 7 days.</p>
         <form onsubmit="event.preventDefault();">
                 <section>
-                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search-forecast" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
-                        <p>
-                        <button class="rounded-button" type="button" id="search_btn_forecast">Search</button>
-                        </p> 
+                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search-forecast" name="inputCity" rows="1" required>
+                    <button class="rounded-button" type="button" id="search_btn_forecast">Search</button>
                 </section>
             
         </form>
