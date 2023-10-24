@@ -18,72 +18,6 @@
 
 
 <script>
-
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var launchButton = document.getElementById('search_btn');
-
-        launchButton.addEventListener('click', function () {
-
-            var cityform = document.getElementById('cityform');
-            var city = cityform.value;
-
-            fetch('/search', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ city: city })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                    if(data.correct){
-                        var form1 = document.getElementById("cityname");
-                        var form2 = document.getElementById("temp");
-                        var form3 = document.getElementById("hum");
-                        var form4 = document.getElementById("cloud");
-                        form1.innerHTML = data.city;
-                        form2.innerHTML = data.temperature;
-                        form3.innerHTML = data.humidity;
-                        form4.innerHTML = data.cloudiness;
-
-                        var cloudinessPic = document.getElementById('weatherpic');
-
-
-                        switch (data.cloudiness) {
-                            case "overcast clouds":
-                                cloudinessPic.src = "/static/images/cloudy.png";
-                                break;
-                            case "light rain":
-                                cloudinessPic.src = "/static/images/cloudy2.png";
-                                break;
-                            case "secco":
-                                cloudinessPic.src = "/static/images/cloudy.png";
-                                break;
-                            case "clear sky":
-                                cloudinessPic.src = "/static/images/sun.png";
-                                break;
-                            case "few clouds":
-                                cloudinessPic.src = "/static/images/storm.png";
-                                break;
-                            case "rain":
-                                cloudinessPic.src = "/static/images/storm.png";
-                                break;
-                            case "broken clouds":
-                                cloudinessPic.src = "/static/images/cloudy.png";
-                                break;
-                            case "scattered clouds":
-                                cloudinessPic.src = "/static/images/cloudy.png";
-                                break;
-                            default:
-                                cloudinessPic.src = "/static/images/cloudy.png";
-                        }
-                    }
-            });
-        
-        });
-    });
-
     document.addEventListener('DOMContentLoaded', function () {
         var launchButton = document.getElementById('login_btn');
 
@@ -187,10 +121,10 @@
                 var weather = firstForecast.weather;
         
                 // Aggiorna gli elementi HTML con i dati estratti
-                document.getElementById('cityName').textContent = city;
-                document.getElementById('temperature').textContent = temp + "°C";
-                document.getElementById('humidity').textContent = humidity + "%";
-                document.getElementById('weather').textContent = weather;
+                document.getElementById('cityName0').textContent = city;
+                document.getElementById('temperature0').textContent = temp + "°C";
+                document.getElementById('humidity0').textContent = humidity + "%";
+                document.getElementById('weather0').textContent = weather;
             } else {
                 console.error('Nessuna previsione trovata o dati in un formato inaspettato.');
             }
