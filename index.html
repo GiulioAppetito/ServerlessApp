@@ -164,16 +164,18 @@
                         if (Array.isArray(bodyData) && bodyData.length > 0) {
                             // Prendi i dati dalla prima previsione
                             var firstForecast = bodyData[0];
-                            var city = firstForecast.cityName;
-                            var temp = firstForecast.max_temperature;
-                            var humidity = firstForecast.humidity;
-                            var weather = firstForecast.weather;
+                            var city0 = firstForecast.cityName;
+                            var max_temp0 = firstForecast.max_temperature;
+                            var min_temp0 = firstForecast.min_temperature;
+                            var humidity0 = firstForecast.humidity;
+                            var weather0 = firstForecast.weather;
 
                             // Aggiorna gli elementi HTML con i dati estratti
-                            document.getElementById('cityName0').textContent = city;
-                            document.getElementById('temperature0').textContent = temp + "°C";
-                            document.getElementById('humidity0').textContent = humidity + "%";
-                            document.getElementById('weather0').textContent = weather;
+                            //document.getElementById('cityName0').textContent = city;
+                            document.getElementById('max_temp0').textContent = max_temp0 + "°C";
+                            document.getElementById('min_temp0').textContent = min_temp0 + "°C";
+                            document.getElementById('humidity0').textContent = humidity0 + "%";
+                            document.getElementById('weather0').textContent = weather0;
                         } else {
                             console.error('Nessuna previsione trovata nell\'array dei dati previsionali.');
                         }
