@@ -159,26 +159,31 @@
                 .then(response => response.json())
                 .then(data => {
                     if (Array.isArray(data) && data.length > 0) {
-                        // Prendi i dati dalla prima previsione
-                        var firstForecast = data[0];
-                        var city = firstForecast.cityName;
-                        var temp = firstForecast.max_temperature;
-                        var humidity = firstForecast.humidity;
-                        var weather = firstForecast.weather;
-
-                        // Aggiorna gli elementi HTML con i dati estratti
-                        document.getElementById('cityName0').textContent = city;
-                        document.getElementById('temperature0').textContent = temp + "°C";
-                        document.getElementById('humidity0').textContent = humidity + "%";
-                        document.getElementById('weather0').textContent = weather;
+                        // Accedi all'array dei dati previsionali all'interno della chiave "body"
+                        var forecasts = JSON.parse(data[0].body);
+                
+                        // Verifica se ci sono dati previsionali nell'array
+                        if (Array.isArray(forecasts) && forecasts.length > 0) {
+                            // Prendi i dati dalla prima previsione
+                            var firstForecast = forecasts[0];
+                            var city = firstForecast.cityName;
+                            var temp = firstForecast.max_temperature;
+                            var humidity = firstForecast.humidity;
+                            var weather = firstForecast.weather;
+                
+                            // Aggiorna gli elementi HTML con i dati estratti
+                            document.getElementById('cityName0').textContent = city;
+                            document.getElementById('temperature0').textContent = temp + "°C";
+                            document.getElementById('humidity0').textContent = humidity + "%";
+                            document.getElementById('weather0').textContent = weather;
+                        } else {
+                            console.error('Nessuna previsione trovata nell\'array dei dati previsionali.');
+                        }
                     } else {
                         console.error('Nessuna previsione trovata o dati in un formato inaspettato.');
                     }
-
-                    var dataCorrente = new Date();
-                    var dataOdierna = dataCorrente.toISOString().slice(0, 10);
-                    var ora = dataCorrente.toTimeString().slice(0, 8);
-                    document.getElementById('todayDateTime').textContent = dataOdierna + ", " + ora;
+                
+                    // Altri aggiornamenti o operazioni qui, se necessario
                 })
                 .catch(error => console.error('Errore nella richiesta: ' + error));
             });
