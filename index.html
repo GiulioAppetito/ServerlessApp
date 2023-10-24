@@ -221,7 +221,7 @@
                         var max_temp = data.max_temperature;
                         var min_temp = data.min_temperature;
                         var avg_temp = data.avg_temperature;
-                        var max_humidity = data.weather;
+                        var max_humidity = data.max_humidity;
                         var min_humidity = data.min_humidity;
                         var avg_humidity = data.avg_humidity;
                         var avg_cloudcover = data.avg_cloudcover;
@@ -366,10 +366,10 @@
     </section>
     <section class="container-title">
         <h2>Statistics</h2>
-        <p>Check out weather statistics for the past 14 days.</p>
+        <p>Check out weather statistics for the past 7 days.</p>
         <form>
                 <section>
-                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search-past" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
+                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search-past" name="inputCity" rows="1" required>
                         <p>
                         <button class="rounded-button" type="button" id="search_btn_past">Search</button>
                         </p> 
