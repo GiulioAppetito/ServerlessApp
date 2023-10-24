@@ -156,37 +156,50 @@
                     'Content-Type': 'application/json',
                 },
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.statusCode === 200) {
-                        var bodyData = JSON.parse(data.body); // Analizza il corpo JSON all'interno della risposta
+            .then(response => response.json())
+            .then(data => {
+                if (data.statusCode === 200) {
+                    var bodyData = JSON.parse(data.body); // Analizza il corpo JSON all'interno della risposta
 
-                        if (Array.isArray(bodyData) && bodyData.length > 0) {
-                            // Prendi i dati dalla prima previsione
-                            var firstForecast = bodyData[0];
-                            var city0 = firstForecast.cityName;
-                            var max_temp0 = firstForecast.max_temperature;
-                            var min_temp0 = firstForecast.min_temperature;
-                            var humidity0 = firstForecast.humidity;
-                            var weather0 = firstForecast.weather;
+                    if (Array.isArray(bodyData) && bodyData.length > 0) {
+                        // Itera attraverso i dati previsionali
+                        for (var i = 0; i < bodyData.length; i++) {
+                            var forecast = bodyData[i];
+                            var date = forecast.date;
+                            var city = forecast.cityName;
+                            var max_temp = forecast.max_temperature;
+                            var min_temp = forecast.min_temperature;
+                            var humidity = forecast.humidity;
+                            var weather = forecast.weather;
 
                             // Aggiorna gli elementi HTML con i dati estratti
-                            //document.getElementById('cityName0').textContent = city;
-                            document.getElementById('max_temp0').textContent = max_temp0 + "°C";
-                            document.getElementById('min_temp0').textContent = min_temp0 + "°C";
-                            document.getElementById('humidity0').textContent = humidity0 + "%";
-                            document.getElementById('weather0').textContent = weather0;
-                        } else {
-                            console.error('Nessuna previsione trovata nell\'array dei dati previsionali.');
+                            var cityNameElement = document.getElementById('cityName' + i);
+                            cityNameElement.textContent = date;
+
+                            var maxTempElement = document.getElementById('max_temp' + i);
+                            maxTempElement.textContent = max_temp + "°C";
+
+                            var minTempElement = document.getElementById('min_temp' + i);
+                            minTempElement.textContent = min_temp + "°C";
+
+                            var humidityElement = document.getElementById('humidity' + i);
+                            humidityElement.textContent = humidity + "%";
+
+                            var weatherElement = document.getElementById('weather' + i);
+                            weatherElement.textContent = weather;
                         }
                     } else {
-                        console.error('La risposta ha restituito uno statusCode diverso da 200.');
+                        console.error('Nessuna previsione trovata nell\'array dei dati previsionali.');
                     }
-                })
-                .catch(error => console.error('Errore nella richiesta: ' + error));
+                } else {
+                    console.error('La risposta ha restituito uno statusCode diverso da 200.');
+                }
+            })
+            .catch(error => console.error('Errore nella richiesta: ' + error));
         });
     });
 </script>
+
 
     
 </head>
