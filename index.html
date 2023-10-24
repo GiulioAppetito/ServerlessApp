@@ -242,7 +242,7 @@
     <section class="container-title">
         <h2>Forecast</h2>
         <p>Check out weather forecast for the next 7 days.</p>
-        <form>
+        <form onsubmit="event.preventDefault();">
                 <section>
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search-forecast" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
                         <p>
