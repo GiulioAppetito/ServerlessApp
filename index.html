@@ -199,6 +199,47 @@
         });
     });
 </script>
+</script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var searchButton = document.getElementById('search_btn_past');
+            searchButton.addEventListener('click', function () {
+                var cityName = document.getElementById('city-search-past').value;
+                var url = 'https://tpuvvw8cx9.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
+
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({ cityName: cityName }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(response => response.text())
+                    .then(result => {
+                        var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
+                        // Estrarre i singoli campi dalla risposta JSON
+                        var max_temp = data.max_temperature;
+                        var min_temp = data.min_temperature;
+                        var avg_temp = data.avg_temperature;
+                        var max_humidity = data.weather;
+                        var min_humidity = data.min_humidity;
+                        var avg_humidity = data.avg_humidity;
+                        var avg_cloudcover = data.avg_cloudcover;
+
+                        // Aggiorna gli elementi HTML con i dati estratti 
+                        document.getElementById('past_max_temperature').textContent = max_temp + "°C";
+                        document.getElementById('past_min_temperature').textContent = min_temp + "°C";
+                        document.getElementById('past_avg_temperature').textContent = avg_temp + "°C";
+                        document.getElementById('past_max_humidity').textContent = max_humidity;
+                        document.getElementById('past_min_humidity').textContent = min_humidity;
+                        document.getElementById('past_avg_humidity').textContent = avg_humidity;
+                        document.getElementById('past_avg_cloudcover').textContent = avg_cloudcover;
+                    })
+                    .catch(error => console.error('Errore nella richiesta: ' + error));
+            });
+
+        });
+    </script>
 
 
     
@@ -270,7 +311,7 @@
     <section class="weather-container">
         <div class="day-card" id="day0">
             <h2 id='date0'></h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
+            <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp0'></span></p>
             <p>Min temp: <span class="temperature" id='min_temp0'></span></p>
             <p>Wind speed: <span class="temperature" id='wind_speed0'></span></p>
@@ -279,7 +320,7 @@
         </div>
         <div class="day-card" id="day1">
             <h2 id='date1'></h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
+            <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp1'></span></p>
             <p>Min temp: <span class="temperature" id='min_temp1'></span></p>
             <p>Wind speed: <span class="temperature" id='wind_speed1'></span></p>
@@ -288,7 +329,7 @@
         </div>
         <div class="day-card" id="day2">
             <h2 id='date2'></h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
+            <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp2'></span></p>
             <p>Min temp: <span class="temperature" id='min_temp2'></span></p>
             <p>Wind speed: <span class="temperature" id='wind_speed2'></span></p>
@@ -297,7 +338,7 @@
         </div>
         <div class="day-card" id="day3">
             <h2 id='date3'></h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
+            <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp3'></span></p>
             <p>Min temp: <span class="temperature" id='min_temp3'></span></p>
             <p>Wind speed: <span class="temperature" id='wind_speed3'></span></p>
@@ -306,7 +347,7 @@
         </div>
         <div class="day-card" id="day4">
             <h2 id='date4'></h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
+            <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp4'></span></p>
             <p>Min temp: <span class="temperature" id='min_temp4'></span></p>
             <p>Wind speed: <span class="temperature" id='wind_speed4'></span></p>
@@ -315,7 +356,7 @@
         </div>
         <div class="day-card" id="day5">
             <h2 id='date5'></h2>
-            <img src="..\static\images\storm.png" alt="Nome della città">
+            <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp5'></span></p>
             <p>Min temp: <span class="temperature" id='min_temp5'></span></p>
             <p>Wind speed: <span class="temperature" id='wind_speed5'></span></p>
@@ -330,7 +371,7 @@
                 <section>
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search-past" name="inputCity" rows="1" required>{{ request.form['inputCity'] }}
                         <p>
-                        <button class="rounded-button" type="button" onclick="callAPI()">Search</button>
+                        <button class="rounded-button" type="button" id="search_btn_past">Search</button>
                         </p> 
                 </section>
             
@@ -338,10 +379,13 @@
     </section>
     <section class="weather-container">
         <div class="stats-card">
-            <p>Average temp: <span class="temperature">25°C</span></p>
-            <p>Average humidity: <span class="temperature">40%</span></p>
-            <p>Average temp: <span class="temperature">25°C</span></p>
-            <p>Average temp: <span class="temperature">25°C</span></p>
+            <p>Max temp: <span class="temperature" id="past_max_temperature"></span></p>
+            <p>Min temp: <span class="temperature" id="past_min_temperature"></span></p>
+            <p>Average temp: <span class="temperature" id="past_avg_temperature"></span></p>
+            <p>Max humidity: <span class="temperature" id="past_max_humidity"></span></p>
+            <p>Min humidity: <span class="temperature" id="past_min_humidity"></span></p>
+            <p>Average humidity: <span class="temperature" id="past_avg_humidity"></span></p>
+            <p>Average cloudcover: <span class="temperature" id="past_avg_cloudcover"></span></p>
         </div>
     </h1>
     </section>
