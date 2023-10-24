@@ -143,11 +143,9 @@
         });
     </script>
     <script>
-        // Event listener per il bottone "search_btn_forecast"
-        var searchForecastButton = document.getElementById('search_btn_forecast');
-        searchForecastButton.addEventListener('click', forecastAPI);
-
-        function forecastAPI() {
+        document.addEventListener("DOMContentLoaded", function () {
+            var searchButton = document.getElementById('search_btn_forecast');
+            searchButton.addEventListener('click', function () {
             var cityName = document.getElementById('city-search-forecast').value;
             var url = 'https://or8dml27g0.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
 
@@ -183,8 +181,11 @@
                     document.getElementById('todayDateTime').textContent = dataOdierna + ", " + ora;
                 })
                 .catch(error => console.error('Errore nella richiesta: ' + error));
-        }
+            });
+
+        });
     </script>
+    
 </head>
 <body>
     <header>
