@@ -143,9 +143,9 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var searchButton = document.getElementById('search_btn_forecast');
-            searchButton.addEventListener('click', function () {
+    document.addEventListener("DOMContentLoaded", function () {
+        var searchButton = document.getElementById('search_btn_forecast');
+        searchButton.addEventListener('click', function () {
             var cityName = document.getElementById('city-search-forecast').value;
             var url = 'https://or8dml27g0.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
 
@@ -158,19 +158,17 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (Array.isArray(data) && data.length > 0) {
-                        // Accedi all'array dei dati previsionali all'interno della chiave "body"
-                        var forecasts = JSON.parse(data[0].body);
-                
-                        // Verifica se ci sono dati previsionali nell'array
-                        if (Array.isArray(forecasts) && forecasts.length > 0) {
+                    if (data.statusCode === 200) {
+                        var bodyData = JSON.parse(data.body); // Analizza il corpo JSON all'interno della risposta
+
+                        if (Array.isArray(bodyData) && bodyData.length > 0) {
                             // Prendi i dati dalla prima previsione
-                            var firstForecast = forecasts[0];
+                            var firstForecast = bodyData[0];
                             var city = firstForecast.cityName;
                             var temp = firstForecast.max_temperature;
                             var humidity = firstForecast.humidity;
                             var weather = firstForecast.weather;
-                
+
                             // Aggiorna gli elementi HTML con i dati estratti
                             document.getElementById('cityName0').textContent = city;
                             document.getElementById('temperature0').textContent = temp + "°C";
@@ -180,16 +178,14 @@
                             console.error('Nessuna previsione trovata nell\'array dei dati previsionali.');
                         }
                     } else {
-                        console.error('Nessuna previsione trovata o dati in un formato inaspettato.');
+                        console.error('La risposta ha restituito uno statusCode diverso da 200.');
                     }
-                
-                    // Altri aggiornamenti o operazioni qui, se necessario
                 })
                 .catch(error => console.error('Errore nella richiesta: ' + error));
-            });
-
         });
-    </script>
+    });
+</script>
+
     
 </head>
 <body>
