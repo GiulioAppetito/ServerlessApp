@@ -38,6 +38,7 @@
                     },
                 })
                 .then(response => response.json()).then(data => {
+                    console.log('Data:', data); // Aggiungi questa riga per il debug
                     if (data.statusCode == 200) {
                         var usernamelab = document.getElementById('lab3');
                         usernamelab.innerHTML = data.username;
