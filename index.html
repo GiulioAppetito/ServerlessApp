@@ -28,13 +28,15 @@
             var username = usernameform.value;
             var password = passwordform.value;
 
-            fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username: username, password: password })
-            })
+            var url = 'https://f23jr74qg9.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
+
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({ username: username, password: password }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
                 .then(response => response.json()).then(data => {
                     if (data.correct) {
                         var usernamelab = document.getElementById('lab3');
