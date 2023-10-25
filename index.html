@@ -5,101 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="static/style.css">
     <title>Cloudy Days - Previsioni Meteo</title>
-</head>
-<body>
-    <header>
-        <h1>Cloudy Days</h1>
-        <section class="right-text">
-            <div class="mb-3">
-                <label for="usernameform" class="form-label">Username:</label>
-                <input class="form-control" type="text" id="usernameform" name="inputUsername" required>
-                <label for="passwordform" class="form-label">Password:</label>
-                <input class="form-control" type="password" id="passwordform" name="inputPassword" required>
-            </div>
-            <button class="rounded-button" id="login_btn">Login</button>
-            <label id="lab3" class="form-label" style='display:none'></label>
-            <button class="rounded-button" id="logout_btn" style='display:none'>Logout</button>
-        </section>
-    </header>
-    <section class="container-title">
-        <div>
-            <h2>Today</h2>
-            <p>Check out today's weather.</p>
-        </div>
-        <form>
-            <section>
-                <input class="form-control" placeholder="Insert city name" type="text" id="cityform" name="inputCity" required>
-                <p>
-                    <button class="rounded-button" type="button" id="search_btn">Search</button>
-                </p>
-            </section>
-        </form>
-    </section>
-    <section class="weather-container">
-        <div class="today-card" style="display: none" id='todayCard'>
-            <h2>Today</h2>
-            <b style="font-size: 25px" id="cityName"></b>
-            <p>Last update: <span class="temperature" id="todayDateTime"></span></p>
-            <img src="..\static\images\sun.png">
-            <p>Temp: <span class="temperature" id="temperature"></span></p>
-            <p>Humidity: <span class="temperature" id="humidity"></span></p>
-            <p>Weather: <span class="temperature" id="weather"></span></p>
-        </div>
-        <div class="today-card">
-            <p>Preferences</p>
-        </div>
-    </section>
-    <!-- Ripeti lo stesso modello per gli altri giorni della settimana -->
-    <section class="container-title">
-        <h2>Forecast</h2>
-        <p>Check out weather forecast for the next 7 days.</p>
-        <form onsubmit="event.preventDefault();">
-            <section>
-                <input class="form-control" placeholder="Insert city name" type="text" id="city-search-forecast" name="inputCity" required>
-                <button class="rounded-button" type="button" id="search_btn_forecast">Search</button>
-            </section>
-        </form>
-    </section>
-    <section class="weather-container">
-        <div class="day-card" id="day0" style="display: none">
-            <h2 id='date0'></h2>
-            <img src="..\static\images\storm.png">
-            <p>Max temp: <span class="temperature" id='max_temp0'></span></p>
-            <p>Min temp: <span class="temperature" id='min_temp0'></span></p>
-            <p>Wind speed: <span class="temperature" id='wind_speed0'></span></p>
-            <p>Humidity: <span class="temperature" id='humidity0'></span></p>
-            <p>Weather: <span class="temperature" id='weather0'></span></p>
-        </div>
-        <!-- Ripeti lo stesso modello per gli altri giorni della settimana -->
-    </section>
-    <section class="container-title">
-        <h2>Statistics</h2>
-        <p>Check out weather statistics for the past 7 days.</p>
-        <form>
-            <section>
-                <input class="form-control" placeholder="Insert city name" type="text" id="city-search-past" name="inputCity" required>
-                <p>
-                    <button class="rounded-button" type="button" id="search_btn_past">Search</button>
-                </p>
-            </section>
-        </form>
-    </section>
-    <section class="weather-container">
-        <div class="stats-card" style="display: none" id="statsCard">
-            <p>Max temp: <span class="temperature" id="past_max_temperature"></span></p>
-            <p>Min temp: <span class="temperature" id="past_min_temperature"></span></p>
-            <p>Average temp: <span class="temperature" id="past_avg_temperature"></span></p>
-            <p>Max humidity: <span class="temperature" id="past_max_humidity"></span></p>
-            <p>Min humidity: <span class="temperature" id="past_min_humidity"></span></p>
-            <p>Average humidity: <span class="temperature" id="past_avg_humidity"></span></p>
-            <p>Average cloudcover: <span class="temperature" id="past_avg_cloudcover"></span></p>
-        </div>
-    </section>
-    <footer>
-        <p>&copy; 2023 Cloudy Days</p>
-    </footer>
     <script>
-        <script>
     document.addEventListener('DOMContentLoaded', function () {
         var daysOfWeek = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"];
         var today = new Date();
@@ -349,6 +255,158 @@
 
         });
     </script>
-    </script>
+
+
+    
+</head>
+<body>
+    <header>
+        <h1>Cloudy Days</h1>
+        <section class="right-text">
+
+            <div class="mb-3">
+                <label id="lab1" for="inputUsername" class="form-label">Username:</label>
+                <input class="form-control" type="text" id="usernameform" name="inputUsername" rows="1" required>
+                <label id="lab2" for="InputPassword">Password:</label>
+                <input class="form-control" type="password" id="passwordform" name="inputPassword" required>
+            </div>
+
+            <button class="rounded-button" id="login_btn">Login</button>
+
+            <label id="lab3" class="form-label" style='display:none'>{{ username }}</label>
+
+            <button class="rounded-button" id="logout_btn" style='display:none'>Logout</button>
+
+        </section>
+    </header>
+    <section class="container-title">
+        <div>
+            <h2>Today</h2>
+            <p>Check out today's weather.</p>
+        </div>
+        <form>
+                <section>
+                    <input class="form-control" placeholder="Insert city name" type="text" id="cityform" name="inputCity" rows="1" required>
+                        <p>
+                        <button class="rounded-button" type="button" id="search_btn">Search</button>
+                        </p> 
+                </section>
+            
+        </form>
+    </section>
+    <section class="weather-container">
+
+        <div class="today-card" style="display: none" id='todayCard'>
+            <h2>Today</h2>
+            <b style="font-size: 25px" id="cityName"></b>
+            <p>Last update: <span class="temperature" id="todayDateTime"></span></p>
+            <img src="..\static\images\sun.png">
+            <p>Temp: <span class="temperature" id="temperature"></span></p>
+            <p>Humidity: <span class="temperature" id="humidity"></span></p>
+            <p>Weather: <span class="temperature" id="weather"></span></p>
+        </div>
+        <div class="today-card">
+            <p>Preferences</p>
+
+        </div>
+
+        <!-- Ripeti lo stesso modello per gli altri giorni della settimana -->
+    </section>
+    <section class="container-title">
+        <h2>Forecast</h2>
+        <p>Check out weather forecast for the next 7 days.</p>
+        <form onsubmit="event.preventDefault();">
+                <section>
+                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search-forecast" name="inputCity" rows="1" required>
+                    <button class="rounded-button" type="button" id="search_btn_forecast">Search</button>
+                </section>
+            
+        </form>
+    </section>
+    <section class="weather-container">
+        <div class="day-card" id="day0" style="display: none">
+            <h2 id='date0'></h2>
+            <img src="..\static\images\storm.png">
+            <p>Max temp: <span class="temperature" id='max_temp0'></span></p>
+            <p>Min temp: <span class="temperature" id='min_temp0'></span></p>
+            <p>Wind speed: <span class="temperature" id='wind_speed0'></span></p>
+            <p>Humidity: <span class="temperature" id='humidity0'></span></p>
+            <p>Weather: <span class="temperature" id='weather0'></span></p>
+        </div>
+        <div class="day-card" id="day1" style="display: none">
+            <h2 id='date1'></h2>
+            <img src="..\static\images\storm.png">
+            <p>Max temp: <span class="temperature" id='max_temp1'></span></p>
+            <p>Min temp: <span class="temperature" id='min_temp1'></span></p>
+            <p>Wind speed: <span class="temperature" id='wind_speed1'></span></p>
+            <p>Humidity: <span class="temperature" id='humidity1'></span></p>
+            <p>Weather: <span class="temperature" id='weather1'></span></p>
+        </div>
+        <div class="day-card" id="day2" style="display: none">
+            <h2 id='date2'></h2>
+            <img src="..\static\images\storm.png">
+            <p>Max temp: <span class="temperature" id='max_temp2'></span></p>
+            <p>Min temp: <span class="temperature" id='min_temp2'></span></p>
+            <p>Wind speed: <span class="temperature" id='wind_speed2'></span></p>
+            <p>Humidity: <span class="temperature" id='humidity2'></span></p>
+            <p>Weather: <span class="temperature" id='weather2'></span></p>
+        </div>
+        <div class="day-card" id="day3" style="display: none">
+            <h2 id='date3'></h2>
+            <img src="..\static\images\storm.png">
+            <p>Max temp: <span class="temperature" id='max_temp3'></span></p>
+            <p>Min temp: <span class="temperature" id='min_temp3'></span></p>
+            <p>Wind speed: <span class="temperature" id='wind_speed3'></span></p>
+            <p>Humidity: <span class="temperature" id='humidity3'></span></p>
+            <p>Weather: <span class="temperature" id='weather3'></span></p>
+        </div>
+        <div class="day-card" id="day4" style="display: none">
+            <h2 id='date4'></h2>
+            <img src="..\static\images\storm.png">
+            <p>Max temp: <span class="temperature" id='max_temp4'></span></p>
+            <p>Min temp: <span class="temperature" id='min_temp4'></span></p>
+            <p>Wind speed: <span class="temperature" id='wind_speed4'></span></p>
+            <p>Humidity: <span class="temperature" id='humidity4'></span></p>
+            <p>Weather: <span class="temperature" id='weather4'></span></p>
+        </div>
+        <div class="day-card" id="day5" style="display: none">
+            <h2 id='date5'></h2>
+            <img src="..\static\images\storm.png">
+            <p>Max temp: <span class="temperature" id='max_temp5'></span></p>
+            <p>Min temp: <span class="temperature" id='min_temp5'></span></p>
+            <p>Wind speed: <span class="temperature" id='wind_speed5'></span></p>
+            <p>Humidity: <span class="temperature" id='humidity5'></span></p>
+            <p>Weather: <span class="temperature" id='weather5'></span></p>
+        </div>
+    </section>
+    <section class="container-title">
+        <h2>Statistics</h2>
+        <p>Check out weather statistics for the past 7 days.</p>
+        <form>
+                <section>
+                    <input class="form-control" placeholder="Insert city name" type="text" id="city-search-past" name="inputCity" rows="1" required>
+                        <p>
+                        <button class="rounded-button" type="button" id="search_btn_past">Search</button>
+                        </p> 
+                </section>
+            
+        </form>
+    </section>
+    <section class="weather-container">
+        <div class="stats-card" style="display: none" id="statsCard">
+            <p>Max temp: <span class="temperature" id="past_max_temperature"></span></p>
+            <p>Min temp: <span class="temperature" id="past_min_temperature"></span></p>
+            <p>Average temp: <span class="temperature" id="past_avg_temperature"></span></p>
+            <p>Max humidity: <span class="temperature" id="past_max_humidity"></span></p>
+            <p>Min humidity: <span class="temperature" id="past_min_humidity"></span></p>
+            <p>Average humidity: <span class="temperature" id="past_avg_humidity"></span></p>
+            <p>Average cloudcover: <span class="temperature" id="past_avg_cloudcover"></span></p>
+        </div>
+    </h1>
+    </section>
+    
+    <footer>
+        <p>&copy; 2023 Cloudy Days</p>
+    </footer>
 </body>
 </html>
