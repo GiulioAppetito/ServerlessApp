@@ -227,8 +227,9 @@
                 })
                     .then(response => response.text())
                     .then(result => {
+                        console.log('Result:', result); 
                         var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
-                        console.log('Data:', data); 
+
                         // Estrarre i singoli campi dalla risposta JSON
                         var max_temp = data.max_temperature;
                         var min_temp = data.min_temperature;
