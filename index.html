@@ -121,6 +121,10 @@
                         var humidity = data.humidity;
                         var weather = data.weather;
 
+                        // Mostra la card
+                        var card = document.getElementById('todayCard');
+                        card.style.display = "block";
+
                         // Aggiorna gli elementi HTML con i dati estratti 
                         document.getElementById('cityName').textContent = city;
                         document.getElementById('temperature').textContent = temp + "°C";
@@ -171,6 +175,10 @@
                             var min_temp = forecast.min_temperature;
                             var humidity = forecast.humidity;
                             var weather = forecast.weather;
+
+                            // Mostra la card
+                            var card = document.getElementById('day'+i);
+                            card.style.display = "block";
 
                             // Aggiorna gli elementi HTML con i dati estratti
                             var dateElement = document.getElementById('date' + i);
@@ -225,6 +233,10 @@
                         var min_humidity = data.min_humidity;
                         var avg_humidity = data.avg_humidity;
                         var avg_cloudcover = data.avg_cloudcover;
+
+                        // Mostra la card
+                        var card = document.getElementById('statsCard');
+                        card.style.display = "block";
 
                         // Aggiorna gli elementi HTML con i dati estratti 
                         document.getElementById('past_max_temperature').textContent = max_temp + "°C";
@@ -281,7 +293,7 @@
     </section>
     <section class="weather-container">
 
-        <div class="today-card">
+        <div class="today-card" style="display: none" id='todayCard'>
             <h2>Today</h2>
             <b style="font-size: 25px" id="cityName"></b>
             <p>Last update: <span class="temperature" id="todayDateTime"></span></p>
@@ -309,7 +321,7 @@
         </form>
     </section>
     <section class="weather-container">
-        <div class="day-card" id="day0">
+        <div class="day-card" id="day0" style="display: none">
             <h2 id='date0'></h2>
             <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp0'></span></p>
@@ -318,7 +330,7 @@
             <p>Humidity: <span class="temperature" id='humidity0'></span></p>
             <p>Weather: <span class="temperature" id='weather0'></span></p>
         </div>
-        <div class="day-card" id="day1">
+        <div class="day-card" id="day1" style="display: none">
             <h2 id='date1'></h2>
             <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp1'></span></p>
@@ -327,7 +339,7 @@
             <p>Humidity: <span class="temperature" id='humidity1'></span></p>
             <p>Weather: <span class="temperature" id='weather1'></span></p>
         </div>
-        <div class="day-card" id="day2">
+        <div class="day-card" id="day2" style="display: none">
             <h2 id='date2'></h2>
             <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp2'></span></p>
@@ -336,7 +348,7 @@
             <p>Humidity: <span class="temperature" id='humidity2'></span></p>
             <p>Weather: <span class="temperature" id='weather2'></span></p>
         </div>
-        <div class="day-card" id="day3">
+        <div class="day-card" id="day3" style="display: none">
             <h2 id='date3'></h2>
             <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp3'></span></p>
@@ -345,7 +357,7 @@
             <p>Humidity: <span class="temperature" id='humidity3'></span></p>
             <p>Weather: <span class="temperature" id='weather3'></span></p>
         </div>
-        <div class="day-card" id="day4">
+        <div class="day-card" id="day4" style="display: none">
             <h2 id='date4'></h2>
             <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp4'></span></p>
@@ -354,7 +366,7 @@
             <p>Humidity: <span class="temperature" id='humidity4'></span></p>
             <p>Weather: <span class="temperature" id='weather4'></span></p>
         </div>
-        <div class="day-card" id="day5">
+        <div class="day-card" id="day5" style="display: none">
             <h2 id='date5'></h2>
             <img src="..\static\images\storm.png">
             <p>Max temp: <span class="temperature" id='max_temp5'></span></p>
@@ -378,7 +390,7 @@
         </form>
     </section>
     <section class="weather-container">
-        <div class="stats-card">
+        <div class="stats-card" style="display: none" id="statsCard>
             <p>Max temp: <span class="temperature" id="past_max_temperature"></span></p>
             <p>Min temp: <span class="temperature" id="past_min_temperature"></span></p>
             <p>Average temp: <span class="temperature" id="past_avg_temperature"></span></p>
