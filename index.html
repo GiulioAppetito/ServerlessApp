@@ -11,8 +11,8 @@
         var today = new Date();
         var dayOfWeek = daysOfWeek[today.getDay()];
 
-        var dayOfWeekElement = document.getElementById('day-of-week');
-        dayOfWeekElement.textContent = "-" + dayOfWeek;
+        //var dayOfWeekElement = document.getElementById('day-of-week');
+        //dayOfWeekElement.textContent = "-" + dayOfWeek;
     });
 </script>
 
@@ -28,7 +28,7 @@
             var username = usernameform.value;
             var password = passwordform.value;
 
-            var url = 'https://f23jr74qg9.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
+            var url = 'https://f23jr74qg9.execute-api.us-east-1.amazonaws.com/dev'; 
 
                 fetch(url, {
                     method: 'POST',
@@ -38,7 +38,7 @@
                     },
                 })
                 .then(response => response.json()).then(data => {
-                    console.log('Data:', data); // Aggiungi questa riga per il debug
+                    console.log('Data:', data); 
                     if (data.statusCode == 200) {
                         var usernamelab = document.getElementById('lab3');
                         usernamelab.innerHTML = data.username;
@@ -106,7 +106,7 @@
             var searchButton = document.getElementById('search_btn');
             searchButton.addEventListener('click', function () {
                 var cityName = document.getElementById('cityform').value;
-                var url = 'https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
+                var url = 'https://0kx6tvog8k.execute-api.us-east-1.amazonaws.com/dev';
 
                 fetch(url, {
                     method: 'POST',
@@ -117,8 +117,8 @@
                 })
                     .then(response => response.text())
                     .then(result => {
-                        var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
-                        // Estrarre i singoli campi dalla risposta JSON
+                        var data = JSON.parse(JSON.parse(result).body); 
+                        
                         var city = data.cityName;
                         var temp = data.temperature;
                         var humidity = data.humidity;
