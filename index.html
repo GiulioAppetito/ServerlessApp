@@ -217,7 +217,7 @@
             searchButton.addEventListener('click', function () {
                 var cityName = document.getElementById('city-search-past').value;
                 var url = 'https://tpuvvw8cx9.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
-
+                console.log('cityName:', cityName); 
                 fetch(url, {
                     method: 'POST',
                     body: JSON.stringify({ cityName: cityName }),
@@ -229,7 +229,7 @@
                     .then(result => {
                         console.log('Result:', result); 
                         var data = JSON.parse(JSON.parse(result).body); // Analizza il corpo della risposta come JSON
-
+                        console.log('Data:', data); 
                         // Estrarre i singoli campi dalla risposta JSON
                         var max_temp = data.max_temperature;
                         var min_temp = data.min_temperature;
