@@ -216,7 +216,7 @@
         var searchButton = document.getElementById('search_btn_past');
         searchButton.addEventListener('click', function () {
             var cityName = document.getElementById('city-search-past').value;
-            var url = 'https://tpuvvw8cx9.execute-api.us-east-1.amazonaws.com/dev?cityName=' + cityName; // Aggiungi il parametro cityName direttamente all'URL
+            var url = 'https://tpuvvw8cx9.execute-api.us-east-1.amazonaws.com/dev/cityName=' + cityName; // Aggiungi il parametro cityName direttamente all'URL
             console.log('cityName:', cityName); 
             fetch(url)
                 .then(response => response.json())
