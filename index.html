@@ -235,11 +235,32 @@
                 .then(data => {
                     console.log('Data:', data);
                     // Estrarre i campi dalla risposta JSON (stesso codice come prima)
+                    var max_temp = data.max_temperature;
+                    var min_temp = data.min_temperature;
+                    var avg_temp = data.avg_temperature;
+                    var max_humidity = data.max_humidity;
+                    var min_humidity = data.min_humidity;
+                    var avg_humidity = data.avg_humidity;
+                    var avg_cloudcover = data.avg_cloudcover;
+
+                    // Mostra la card
+                    var card = document.getElementById('statsCard');
+                    card.style.display = "block";
+
+                    // Aggiorna gli elementi HTML con i dati estratti 
+                    document.getElementById('past_max_temperature').textContent = max_temp + "°C";
+                    document.getElementById('past_min_temperature').textContent = min_temp + "°C";
+                    document.getElementById('past_avg_temperature').textContent = avg_temp + "°C";
+                    document.getElementById('past_max_humidity').textContent = max_humidity + "%";
+                    document.getElementById('past_min_humidity').textContent = min_humidity + "%";
+                    document.getElementById('past_avg_humidity').textContent = avg_humidity + "%";
+                    document.getElementById('past_avg_cloudcover').textContent = avg_cloudcover + "%";
                 })
                 .catch(error => console.error('Errore nella richiesta: ' + error));
         });
     });
 </script>
+
 
 
 
