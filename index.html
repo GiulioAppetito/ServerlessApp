@@ -219,7 +219,7 @@
                 var url = 'https://tpuvvw8cx9.execute-api.us-east-1.amazonaws.com/dev'; // Sostituisci con l'URL del tuo API Gateway
                 console.log('cityName:', cityName); 
                 fetch(url, {
-                    method: 'POST',
+                    method: 'GET',
                     body: JSON.stringify({ cityName: cityName }),
                     headers: {
                         'Content-Type': 'application/json',
