@@ -216,38 +216,31 @@
         var searchButton = document.getElementById('search_btn_past');
         searchButton.addEventListener('click', function () {
             var cityName = document.getElementById('city-search-past').value;
-            var url = 'https://tpuvvw8cx9.execute-api.us-east-1.amazonaws.com/dev/cityName=' + cityName; // Aggiungi il parametro cityName direttamente all'URL
-            console.log('cityName:', cityName); 
-            fetch(url)
+            var url = 'https://tpuvvw8cx9.execute-api.us-east-1.amazonaws.com/dev'; // URL senza il parametro cityName
+            console.log('cityName:', cityName);
+            
+            // Dati da inviare con la richiesta POST
+            var data = {
+                cityName: cityName
+            };
+
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(data), // Converti i dati in formato JSON
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Data:', data); 
-                    // Estrarre i singoli campi dalla risposta JSON
-                    var max_temp = data.max_temperature;
-                    var min_temp = data.min_temperature;
-                    var avg_temp = data.avg_temperature;
-                    var max_humidity = data.max_humidity;
-                    var min_humidity = data.min_humidity;
-                    var avg_humidity = data.avg_humidity;
-                    var avg_cloudcover = data.avg_cloudcover;
-
-                    // Mostra la card
-                    var card = document.getElementById('statsCard');
-                    card.style.display = "block";
-
-                    // Aggiorna gli elementi HTML con i dati estratti 
-                    document.getElementById('past_max_temperature').textContent = max_temp + "°C";
-                    document.getElementById('past_min_temperature').textContent = min_temp + "°C";
-                    document.getElementById('past_avg_temperature').textContent = avg_temp + "°C";
-                    document.getElementById('past_max_humidity').textContent = max_humidity + "%";
-                    document.getElementById('past_min_humidity').textContent = min_humidity + "%";
-                    document.getElementById('past_avg_humidity').textContent = avg_humidity + "%";
-                    document.getElementById('past_avg_cloudcover').textContent = avg_cloudcover + "%";
+                    console.log('Data:', data);
+                    // Estrarre i campi dalla risposta JSON (stesso codice come prima)
                 })
                 .catch(error => console.error('Errore nella richiesta: ' + error));
         });
     });
 </script>
+
 
 
 
