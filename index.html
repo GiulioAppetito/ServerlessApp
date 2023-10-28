@@ -234,14 +234,18 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Data:', data);
-                    // Estrarre i campi dalla risposta JSON (stesso codice come prima)
-                    var max_temp = data.max_temperature;
-                    var min_temp = data.min_temperature;
-                    var avg_temp = data.avg_temperature;
-                    var max_humidity = data.max_humidity;
-                    var min_humidity = data.min_humidity;
-                    var avg_humidity = data.avg_humidity;
-                    var avg_cloudcover = data.avg_cloudcover;
+
+                    // Assicurati di analizzare correttamente la risposta JSON
+                    var responseJson = JSON.parse(data.body);
+
+                    // Estrarre i campi dalla risposta JSON
+                    var max_temp = responseJson.max_temperature;
+                    var min_temp = responseJson.min_temperature;
+                    var avg_temp = responseJson.avg_temperature;
+                    var max_humidity = responseJson.max_humidity;
+                    var min_humidity = responseJson.min_humidity;
+                    var avg_humidity = responseJson.avg_humidity;
+                    var avg_cloudcover = responseJson.avg_cloudcover;
 
                     // Mostra la card
                     var card = document.getElementById('statsCard');
@@ -260,6 +264,7 @@
         });
     });
 </script>
+
 
 
 
