@@ -120,8 +120,8 @@
                         var data = JSON.parse(JSON.parse(result).body); 
                         
                         var city = data.cityName;
-                        var temp = data.temperature;
-                        var humidity = data.humidity;
+                        var temp = data.temperature.toFixed(2);
+                        var humidity = data.humidity.toFixed(2);
                         var weather = data.weather;
 
                         // Mostra la card
@@ -174,9 +174,9 @@
                             var forecast = bodyData[i];
                             var date = forecast.date;
                             var city = forecast.cityName;
-                            var max_temp = forecast.max_temperature;
-                            var min_temp = forecast.min_temperature;
-                            var humidity = forecast.humidity;
+                            var max_temp = forecast.max_temperature.toFixed(2);
+                            var min_temp = forecast.min_temperature.toFixed(2);
+                            var humidity = forecast.humidity.toFixed(2);
                             var weather = forecast.weather;
 
                             // Mostra la card
@@ -239,12 +239,12 @@
                     var responseJson = JSON.parse(data.body);
 
                     // Estrarre i campi dalla risposta JSON
-                    var max_temp = responseJson.max_temperature;
-                    var min_temp = responseJson.min_temperature;
-                    var avg_temp = responseJson.avg_temperature;
-                    var max_humidity = responseJson.max_humidity;
-                    var min_humidity = responseJson.min_humidity;
-                    var avg_humidity = responseJson.avg_humidity;
+                    var max_temp = responseJson.max_temperature.toFixed(2);
+                    var min_temp = responseJson.min_temperature.toFixed(2);
+                    var avg_temp = responseJson.avg_temperature.toFixed(2);
+                    var max_humidity = responseJson.max_humidity.toFixed(2);
+                    var min_humidity = responseJson.min_humidity.toFixed(2);
+                    var avg_humidity = responseJson.avg_humidity.toFixed(2);
                     var avg_cloudcover = responseJson.avg_cloudcover;
 
                     // Mostra la card
