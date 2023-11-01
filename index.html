@@ -59,7 +59,24 @@
                         form2.style.display = "none";
                         form3.style.display = "none";
                         form4.style.display = "none";
-                    }
+
+                        // Aggiorna l'elenco delle città preferite
+                        var favoriteCitiesList = document.getElementById('favoriteCitiesList');
+                        favoriteCitiesList.innerHTML = ""; // Cancella le città precedenti (se ce ne sono)
+                
+                        // Aggiungi le città preferite come elementi della lista
+                        data.favoriteCities.forEach(function(city) {
+                            var cityItem = document.createElement('li');
+                            cityItem.textContent = city;
+                            cityItem.classList.add('clickable'); // Aggiungi una classe per rendere l'elemento cliccabile
+                            favoriteCitiesList.appendChild(cityItem);
+                
+                            // Aggiungi un gestore di eventi per gestire il clic sulla città
+                            cityItem.addEventListener('click', function() {
+                                // Esegui uno script per ottenere le informazioni meteo della città cliccata
+                                // Utilizza il nome della città come parametro per la richiesta
+                            });
+                        }
                 });
 
         });
@@ -320,7 +337,9 @@
         </div>
         <div class="today-card">
             <p>Preferences</p>
-
+            <ul id="favoriteCitiesList">
+             <!-- Qui verranno visualizzate le città preferite -->
+            </ul>
         </div>
 
         <!-- Ripeti lo stesso modello per gli altri giorni della settimana -->
