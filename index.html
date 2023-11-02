@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var username = usernameform.value;
         var password = passwordform.value;
 
-        var url = 'https://f23jr74qg9.execute-api.us-east-1.amazonaws.com/dev'; 
+        var url = 'https://f23jr74qg9.execute-api.us-east-1.amazonaws.com/dev';
 
         fetch(url, {
             method: 'POST',
@@ -28,10 +28,14 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Data:', data); 
+            console.log('Data:', data);
+
+            // Analizza il campo "body" contenente una stringa JSON
+            var bodyData = JSON.parse(data.body);
+
             if (data.statusCode == 200) {
                 var usernamelab = document.getElementById('lab3');
-                usernamelab.innerHTML = data.username;
+                usernamelab.innerHTML = bodyData.message;
                 usernamelab.style.display = "block";
 
                 var button1 = document.getElementById("login_btn");
@@ -54,19 +58,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 var favoriteCitiesList = document.getElementById('favoriteCitiesList');
                 favoriteCitiesList.innerHTML = ""; // Cancella le città precedenti (se ce ne sono)
 
-                // Aggiungi le città preferite come elementi della lista
-                data.favoriteCities.forEach(function(city) {
-                    var cityItem = document.createElement('li');
-                    cityItem.textContent = city;
-                    cityItem.classList.add('clickable'); // Aggiungi una classe per rendere l'elemento cliccabile
-                    favoriteCitiesList.appendChild(cityItem);
+                if (bodyData.favorite_cities && Array.isArray(bodyData.favorite_cities)) {
+                    // Aggiungi le città preferite come elementi della lista
+                    bodyData.favorite_cities.forEach(function(city) {
+                        var cityItem = document.createElement('li');
+                        cityItem.textContent = city;
+                        cityItem.classList.add('clickable'); // Aggiungi una classe per rendere l'elemento cliccabile
+                        favoriteCitiesList.appendChild(cityItem);
 
-                    // Aggiungi un gestore di eventi per gestire il clic sulla città
-                    cityItem.addEventListener('click', function() {
-                        // Esegui uno script per ottenere le informazioni meteo della città cliccata
-                        // Utilizza il nome della città come parametro per la richiesta
+                        // Aggiungi un gestore di eventi per gestire il clic sulla città
+                        cityItem.addEventListener('click', function() {
+                            // Esegui uno script per ottenere le informazioni meteo della città cliccata
+                            // Utilizza il nome della città come parametro per la richiesta
+                        });
                     });
-                });
+                }
             }
         });
     });
