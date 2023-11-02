@@ -90,16 +90,10 @@ document.addEventListener('DOMContentLoaded', function () {
     var username = usernamelab.textContent;
 
     launchButton.addEventListener('click', function () {
-        // Esegui il logout e svuota le preferenze delle città
-        fetch('/logout' + username)
-        .then(response => {
-            // Verifica se il logout è avvenuto con successo (potresti dover controllare la risposta)
-            if (response.status === 200) {
-                // Rimuovi tutti gli elementi della lista delle città preferite
-                var favoriteCitiesList = document.getElementById('favoriteCitiesList');
-                favoriteCitiesList.innerHTML = ""; // Rimuovi tutte le città precedenti
-            }
-        });
+        
+        // Rimuovi tutti gli elementi della lista delle città preferite
+        var favoriteCitiesList = document.getElementById('favoriteCitiesList');
+        favoriteCitiesList.innerHTML = ""; // Rimuovi tutte le città precedenti
 
         usernamelab.style.display = "none";
         var button1 = document.getElementById("login_btn");
