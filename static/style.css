@@ -82,6 +82,16 @@ header {
     text-align: center left;
 }
 
+#loginForm {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#login_btn, #logout_btn {
+    vertical-align: middle;
+}
+
+
 /* Stile per l'immagine nelle card delle città */
 .day-card img {
     max-width: 50%; /* Larghezza massima al 100% della card */
