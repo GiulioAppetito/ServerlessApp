@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="static/style.css">
@@ -15,73 +16,74 @@
         //dayOfWeekElement.textContent = "-" + dayOfWeek;
     });
 </script>
-
-
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var launchButton = document.getElementById('login_btn');
-        console.log('before Login function.');
-        launchButton.addEventListener('click', function () {
-            console.log('Login function.');
-            var usernameform = document.getElementById('usernameform');
-            var passwordform = document.getElementById('passwordform');
-            var username = usernameform.value;
-            var password = passwordform.value;
+document.addEventListener('DOMContentLoaded', function () {
+    var launchButton = document.getElementById('login_btn');
+    console.log('before Login function.');
+    launchButton.addEventListener('click', function () {
+        console.log('Login function.');
+        var usernameform = document.getElementById('usernameform');
+        var passwordform = document.getElementById('passwordform');
+        var username = usernameform.value;
+        var password = passwordform.value;
 
-            var url = 'https://f23jr74qg9.execute-api.us-east-1.amazonaws.com/dev'; 
+        var url = 'https://f23jr74qg9.execute-api.us-east-1.amazonaws.com/dev'; 
 
-                fetch(url, {
-                    method: 'POST',
-                    body: JSON.stringify({ username: username, password: password }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .then(response => response.json()).then(data => {
-                    console.log('Data:', data); 
-                    if (data.statusCode == 200) {
-                        var usernamelab = document.getElementById('lab3');
-                        usernamelab.innerHTML = data.username;
-                        usernamelab.style.display = "block";
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({ username: username, password: password }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Data:', data); 
+            if (data.statusCode == 200) {
+                var usernamelab = document.getElementById('lab3');
+                usernamelab.innerHTML = data.username;
+                usernamelab.style.display = "block";
 
-                        var button1 = document.getElementById("login_btn");
-                        var button2 = document.getElementById("logout_btn");
-                        button1.style.display = "none";
-                        button2.style.display = "block";
-                        button2.style.float = "right";
+                var button1 = document.getElementById("login_btn");
+                var button2 = document.getElementById("logout_btn");
+                button1.style.display = "none";
+                button2.style.display = "block";
+                button2.style.float = "right";
 
-                        // login form
-                        var form1 = document.getElementById("lab1");
-                        var form2 = document.getElementById("lab2");
-                        var form3 = document.getElementById("usernameform");
-                        var form4 = document.getElementById("passwordform");
-                        form1.style.display = "none";
-                        form2.style.display = "none";
-                        form3.style.display = "none";
-                        form4.style.display = "none";
+                // login form
+                var form1 = document.getElementById("lab1");
+                var form2 = document.getElementById("lab2");
+                var form3 = document.getElementById("usernameform");
+                var form4 = document.getElementById("passwordform");
+                form1.style.display = "none";
+                form2.style.display = "none";
+                form3.style.display = "none";
+                form4.style.display = "none";
 
-                        // Aggiorna l'elenco delle città preferite
-                        var favoriteCitiesList = document.getElementById('favoriteCitiesList');
-                        favoriteCitiesList.innerHTML = ""; // Cancella le città precedenti (se ce ne sono)
-                
-                        // Aggiungi le città preferite come elementi della lista
-                        data.favoriteCities.forEach(function(city) {
-                            var cityItem = document.createElement('li');
-                            cityItem.textContent = city;
-                            cityItem.classList.add('clickable'); // Aggiungi una classe per rendere l'elemento cliccabile
-                            favoriteCitiesList.appendChild(cityItem);
-                
-                            // Aggiungi un gestore di eventi per gestire il clic sulla città
-                            cityItem.addEventListener('click', function() {
-                                // Esegui uno script per ottenere le informazioni meteo della città cliccata
-                                // Utilizza il nome della città come parametro per la richiesta
-                            });
-                        }
+                // Aggiorna l'elenco delle città preferite
+                var favoriteCitiesList = document.getElementById('favoriteCitiesList');
+                favoriteCitiesList.innerHTML = ""; // Cancella le città precedenti (se ce ne sono)
+
+                // Aggiungi le città preferite come elementi della lista
+                data.favoriteCities.forEach(function(city) {
+                    var cityItem = document.createElement('li');
+                    cityItem.textContent = city;
+                    cityItem.classList.add('clickable'); // Aggiungi una classe per rendere l'elemento cliccabile
+                    favoriteCitiesList.appendChild(cityItem);
+
+                    // Aggiungi un gestore di eventi per gestire il clic sulla città
+                    cityItem.addEventListener('click', function() {
+                        // Esegui uno script per ottenere le informazioni meteo della città cliccata
+                        // Utilizza il nome della città come parametro per la richiesta
+                    });
                 });
-
+            }
         });
     });
+});
 </script>
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var launchButton = document.getElementById('logout_btn');
@@ -282,7 +284,71 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var launchButton = document.getElementById('login_btn');
+        console.log('before Login function.');
+        launchButton.addEventListener('click', function () {
+            console.log('Login function.');
+            var usernameform = document.getElementById('usernameform');
+            var passwordform = document.getElementById('passwordform');
+            var username = usernameform.value;
+            var password = passwordform.value;
 
+            var url = 'https://f23jr74qg9.execute-api.us-east-1.amazonaws.com/dev'; 
+
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({ username: username, password: password }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json()).then(data => {
+                    console.log('Data:', data); 
+                    if (data.statusCode == 200) {
+                        var usernamelab = document.getElementById('lab3');
+                        usernamelab.innerHTML = data.username;
+                        usernamelab.style.display = "block";
+
+                        var button1 = document.getElementById("login_btn");
+                        var button2 = document.getElementById("logout_btn");
+                        button1.style.display = "none";
+                        button2.style.display = "block";
+                        button2.style.float = "right";
+
+                        // login form
+                        var form1 = document.getElementById("lab1");
+                        var form2 = document.getElementById("lab2");
+                        var form3 = document.getElementById("usernameform");
+                        var form4 = document.getElementById("passwordform");
+                        form1.style.display = "none";
+                        form2.style.display = "none";
+                        form3.style.display = "none";
+                        form4.style.display = "none";
+
+                        // Aggiorna l'elenco delle città preferite
+                        var favoriteCitiesList = document.getElementById('favoriteCitiesList');
+                        favoriteCitiesList.innerHTML = ""; // Cancella le città precedenti (se ce ne sono)
+                
+                        // Aggiungi le città preferite come elementi della lista
+                        data.favoriteCities.forEach(function(city) {
+                            var cityItem = document.createElement('li');
+                            cityItem.textContent = city;
+                            cityItem.classList.add('clickable'); // Aggiungi una classe per rendere l'elemento cliccabile
+                            favoriteCitiesList.appendChild(cityItem);
+                
+                            // Aggiungi un gestore di eventi per gestire il clic sulla città
+                            cityItem.addEventListener('click', function() {
+                                // Esegui uno script per ottenere le informazioni meteo della città cliccata
+                                // Utilizza il nome della città come parametro per la richiesta
+                            });
+                        }
+                });
+
+        });
+    });
+</script>
 
 
 
