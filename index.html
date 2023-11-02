@@ -68,9 +68,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 
                         // Aggiungi un gestore di eventi per gestire il clic sulla città
                         cityItem.addEventListener('click', function() {
-                            // Chiamare il tuo script quando viene cliccata una città preferita
+                            // Chiama lo script del meteo attuale 
                             var searchButton = document.getElementById('search_btn');
                             var cityNameInput = document.getElementById('cityform');
+                            cityNameInput.value = city; // Imposta il nome della città cliccata nell'input
+                            searchButton.click(); // Simula il clic sul pulsante di ricerca
+
+                            // Chiama lo script delle previsioni meteo
+                            var searchButton = document.getElementById('search_btn_forecast');
+                            var cityNameInput = document.getElementById('city-search-past');
+                            cityNameInput.value = city; // Imposta il nome della città cliccata nell'input
+                            searchButton.click(); // Simula il clic sul pulsante di ricerca
+
+                            // Chiama lo script delle statistiche meteo
+                            var searchButton = document.getElementById('search_btn_past');
+                            var cityNameInput = document.getElementById('city-search-forecast');
                             cityNameInput.value = city; // Imposta il nome della città cliccata nell'input
                             searchButton.click(); // Simula il clic sul pulsante di ricerca
                         });
