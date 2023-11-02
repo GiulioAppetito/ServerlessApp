@@ -137,6 +137,21 @@ header {
     background-color: #a56300;
 }
 
+/* Aggiungi stili per gli elementi cliccabili */
+.clickable {
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    color: #007BFF; /* Cambia il colore del testo quando l'elemento è selezionato */
+    transition: color 0.2s, text-decoration 0.2s, box-shadow 0.2s; /* Aggiungi una transizione fluida */
+    box-shadow: 0 3px 0 #007BFF; /* Aggiungi un'ombra sottolineata */
+}
+
+/* Stile quando si passa sopra l'elemento con il mouse */
+.clickable:hover {
+    text-decoration: underline; /* Aggiungi sottolineatura al passaggio del mouse */
+    color: #0056b3; /* Cambia il colore del testo al passaggio del mouse */
+    box-shadow: 0 3px 0 #0056b3; /* Cambia l'ombra sottolineata al passaggio del mouse */
+}
+
 
 
 /* Piè di pagina */
