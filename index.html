@@ -205,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         var min_temp = forecast.min_temperature.toFixed(2);
                         var humidity = forecast.humidity.toFixed(2);
                         var weather = forecast.weather;
+                        var wind_speed = forecast.wind_speed.toFixed(2);
 
                         // Mostra la card
                         var card = document.getElementById('day'+i);
@@ -225,6 +226,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         var weatherElement = document.getElementById('weather' + i);
                         weatherElement.textContent = weather;
+
+                        var windElement = document.getElementById('wind_speed' + i);
+                        windElement.textContent = wind_speed.toFixed(2) + " km/h"
                     }
                 } else {
                     console.error('Nessuna previsione trovata nell\'array dei dati previsionali.');
@@ -266,7 +270,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var max_humidity = responseJson.max_humidity.toFixed(2);
             var min_humidity = responseJson.min_humidity.toFixed(2);
             var avg_humidity = responseJson.avg_humidity.toFixed(2);
-            var avg_cloudcover = responseJson.avg_cloudcover;
+            var avg_cloudcover = responseJson.avg_cloudcover.toFixed(2);
 
             // Mostra la card
             var card = document.getElementById('statsCard');
