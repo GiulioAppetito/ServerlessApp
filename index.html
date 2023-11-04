@@ -294,7 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
         addToFavoritesButton.addEventListener('click', function () {
             var cityNameInput = document.getElementById('cityform');
             var cityName = cityNameInput.value;
-            addCityToFavorites(cityName);
+            var username = usernamelab.value;
+            addCityToFavorites(cityName,username);
         });
     </script>
 
@@ -304,7 +305,8 @@ document.addEventListener("DOMContentLoaded", function () {
         addToFavoritesButtonForecast.addEventListener('click', function () {
             var cityNameInput = document.getElementById('city-search-forecast');
             var cityName = cityNameInput.value;
-            addCityToFavorites(cityName);
+            var username = usernamelab.value;
+            addCityToFavorites(cityName,username);
         });
     </script>
 
@@ -314,12 +316,67 @@ document.addEventListener("DOMContentLoaded", function () {
         addToFavoritesButtonPast.addEventListener('click', function () {
             var cityNameInput = document.getElementById('city-search-past');
             var cityName = cityNameInput.value;
-            addCityToFavorites(cityName);
+            var username = usernamelab.value;
+            addCityToFavorites(cityName,username);
         });
 
-        function addCityToFavorites(cityName) {
-            
+        function addCityToFavorites(cityName,username) {
+            // Dati da inviare alla Lambda
+            const requestData = {
+                ID: username,  
+                cityName: cityName
+            };
+        
+            // URL api gateway 
+            const apiUrl = 'https://873wy22sg9.execute-api.us-east-1.amazonaws.com/dev'; 
+        
+            // opzioni per la richiesta
+            const requestOptions = {
+                method: 'POST',
+                body: JSON.stringify(requestData),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            };
+
+            // effettua la richiesta
+            fetch(apiUrl, requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    
+                    console.log(data);
+                    
+                })
+                .catch(error => {
+                    console.error('Errore durante la richiesta:', error);
+                });
+            var cityItem = document.createElement('li');
+                        cityItem.textContent = cityName;
+                        cityItem.classList.add('clickable'); // Aggiungi una classe per rendere l'elemento cliccabile
+                        favoriteCitiesList.appendChild(cityItem);
+                
+                        // Aggiungi un gestore di eventi per gestire il clic sulla città
+                        cityItem.addEventListener('click', function() {
+                            // Chiama lo script del meteo attuale 
+                            var searchButton = document.getElementById('search_btn');
+                            var cityNameInput = document.getElementById('cityform');
+                            cityNameInput.value = city; // Imposta il nome della città cliccata nell'input
+                            searchButton.click(); // Simula il clic sul pulsante di ricerca
+
+                            // Chiama lo script delle previsioni meteo
+                            var searchButton = document.getElementById('search_btn_forecast');
+                            var cityNameInput = document.getElementById('city-search-past');
+                            cityNameInput.value = city; // Imposta il nome della città cliccata nell'input
+                            searchButton.click(); // Simula il clic sul pulsante di ricerca
+
+                            // Chiama lo script delle statistiche meteo
+                            var searchButton = document.getElementById('search_btn_past');
+                            var cityNameInput = document.getElementById('city-search-forecast');
+                            cityNameInput.value = city; // Imposta il nome della città cliccata nell'input
+                            searchButton.click(); // Simula il clic sul pulsante di ricerca
+                        });
         }
+
     </script>
 </head>
 <body>
