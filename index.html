@@ -289,6 +289,38 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
     </script>
+<script>
+        var addToFavoritesButton = document.getElementById('add_to_favorites');
+        addToFavoritesButton.addEventListener('click', function () {
+            var cityNameInput = document.getElementById('cityform');
+            var cityName = cityNameInput.value;
+            addCityToFavorites(cityName);
+        });
+    </script>
+
+    <script>
+        // Per la funzione Forecast
+        var addToFavoritesButtonForecast = document.getElementById('add_to_favorites_forecast');
+        addToFavoritesButtonForecast.addEventListener('click', function () {
+            var cityNameInput = document.getElementById('city-search-forecast');
+            var cityName = cityNameInput.value;
+            addCityToFavorites(cityName);
+        });
+    </script>
+
+    <script>
+        // Per la funzione Statistics
+        var addToFavoritesButtonPast = document.getElementById('add_to_favorites_past');
+        addToFavoritesButtonPast.addEventListener('click', function () {
+            var cityNameInput = document.getElementById('city-search-past');
+            var cityName = cityNameInput.value;
+            addCityToFavorites(cityName);
+        });
+
+        function addCityToFavorites(cityName) {
+            
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -317,9 +349,8 @@ document.addEventListener("DOMContentLoaded", function () {
         <form>
                 <section>
                     <input class="form-control" placeholder="Insert city name" type="text" id="cityform" name="inputCity" rows="1" required>
-                        <p>
-                        <button class="rounded-button" type="button" id="search_btn">Search</button>
-                        </p> 
+                    <button class="rounded-button" type="button" id="search_btn">Search</button>
+                    <button class="rounded-button" type="button" id="add_to_favorites">Add to Favorites</button>
                 </section>
             
         </form>
@@ -351,6 +382,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <section>
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search-forecast" name="inputCity" rows="1" required>
                     <button class="rounded-button" type="button" id="search_btn_forecast">Search</button>
+                    <button class="rounded-button" type="button" id="add_to_favorites_forecast">Add to Favorites</button>
                 </section>
             
         </form>
@@ -417,9 +449,8 @@ document.addEventListener("DOMContentLoaded", function () {
         <form>
                 <section>
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search-past" name="inputCity" rows="1" required>
-                        <p>
-                        <button class="rounded-button" type="button" id="search_btn_past">Search</button>
-                        </p> 
+                    <button class="rounded-button" type="button" id="search_btn_past">Search</button>
+                    <button class="rounded-button" type="button" id="add_to_favorites_past">Add to Favorites</button>
                 </section>
             
         </form>
