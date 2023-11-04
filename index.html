@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         weatherElement.textContent = weather;
 
                         var windElement = document.getElementById('wind_speed' + i);
-                        windElement.textContent = wind_speed.toFixed(2) + " km/h"
+                        windElement.textContent = wind_speed + " km/h"
                     }
                 } else {
                     console.error('Nessuna previsione trovata nell\'array dei dati previsionali.');
