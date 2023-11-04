@@ -294,9 +294,11 @@ document.addEventListener("DOMContentLoaded", function () {
 <script>
     var addToFavoritesButton = document.getElementById('add_to_favorites');
     addToFavoritesButton.addEventListener('click', function () {
+        console.log('Adding to favs.');
         var cityNameInput = document.getElementById('cityform');
         var cityName = cityNameInput.value;
-        var username = usernamelab.value;
+        var lab3 = document.getElementById('lab3');
+        var username = lab3.textContent;
         addCityToFavorites(cityName, username);
     });
 </script>
@@ -305,9 +307,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Per la funzione Forecast
     var addToFavoritesButtonForecast = document.getElementById('add_to_favorites_forecast');
     addToFavoritesButtonForecast.addEventListener('click', function () {
+        console.log('Adding to favs.');
         var cityNameInput = document.getElementById('city-search-forecast');
         var cityName = cityNameInput.value;
-        var username = usernamelab.value;
+        var lab3 = document.getElementById('lab3');
+        var username = lab3.textContent;
         addCityToFavorites(cityName, username);
     });
 </script>
@@ -316,13 +320,16 @@ document.addEventListener("DOMContentLoaded", function () {
     // Per la funzione Statistics
     var addToFavoritesButtonPast = document.getElementById('add_to_favorites_past');
     addToFavoritesButtonPast.addEventListener('click', function () {
+        console.log('Adding to favs.');
         var cityNameInput = document.getElementById('city-search-past');
         var cityName = cityNameInput.value;
-        var username = usernamelab.value;
+        var lab3 = document.getElementById('lab3');
+        var username = lab3.textContent;
         addCityToFavorites(cityName, username);
     });
 
     function addCityToFavorites(cityName, username) {
+        console.log('Function addCityToFavorites.');
         // Dati da inviare alla Lambda
         const requestData = {
             ID: username,
