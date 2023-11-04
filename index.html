@@ -293,21 +293,20 @@ document.addEventListener("DOMContentLoaded", function () {
 <body>
     <header>
         <h1>Cloudy Days</h1>
-        <section class="right-text">
-    <div id="loginForm">
-        <label id="lab1" for="inputUsername" class="form-label">Username:</label>
-        <input class="form-control" type="text" id="usernameform" name="inputUsername" rows="1" required>
-        <label id="lab2" for="InputPassword">Password:</label>
-        <input class="form-control" type="password" id="passwordform" name="inputPassword" required>
-    </div>
+        <div id="loginContainer">
+            <div id="loginForm">
+                <label for="inputUsername" class="form-label">Username:</label>
+                <input type="text" id="usernameform" name="inputUsername" required>
+                <label for="InputPassword">Password:</label>
+                <input type="password" id="passwordform" name="inputPassword" required>
+            </div>
 
-    <button class="rounded-button" id="login_btn">Login</button>
+            <button class="rounded-button" id="login_btn">Login</button>
 
-    <label id="lab3" class="form-label" style='display:none'>{{ username }}</label>
+            <label id="lab3" class="form-label" style="display: none">{{ username }}</label>
 
-    <button class="rounded-button" id="logout_btn" style='display:none'>Logout</button>
-</section>
-
+            <button class="rounded-button" id="logout_btn" style="display: none">Logout</button>
+        </div>
     </header>
     <section class="container-title">
         <div>
