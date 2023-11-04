@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var password = document.getElementById('password').value;
 
         // Esegui la registrazione tramite l'API Gateway con email e password
-        var url = 'URL_dell_API';
+        var url = 'https://rh0lm380xf.execute-api.us-east-1.amazonaws.com/dev';
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({ ID: email, password: password }),
