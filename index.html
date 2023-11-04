@@ -94,10 +94,8 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
     var launchButton = document.getElementById('logout_btn');
     var usernamelab = document.getElementById('lab3');
-    var username = usernamelab.textContent;
 
     launchButton.addEventListener('click', function () {
-        
         // Rimuovi tutti gli elementi della lista delle città preferite
         var favoriteCitiesList = document.getElementById('favoriteCitiesList');
         favoriteCitiesList.innerHTML = ""; // Rimuovi tutte le città precedenti
@@ -110,17 +108,14 @@ document.addEventListener('DOMContentLoaded', function () {
         button1.style.float = "right";
 
         // Ripristina il form di login
-        var form1 = document.getElementById("lab1");
-        var form2 = document.getElementById("lab2");
-        var form3 = document.getElementById("usernameform");
-        var form4 = document.getElementById("passwordform");
-        form1.style.display = "block";
-        form2.style.display = "block";
-        form3.style.display = "block";
-        form4.style.display = "block";
-        form4.style.float = "right";
-        form3.value = "";
-        form4.value = "";
+        var loginForm = document.getElementById("loginForm");
+        loginForm.style.display = "block";
+
+        // Resetta i campi delle form di login e password
+        var usernameform = document.getElementById('usernameform');
+        var passwordform = document.getElementById('passwordform');
+        usernameform.value = "";
+        passwordform.value = "";
     });
 });
 </script>
