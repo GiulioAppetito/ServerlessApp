@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="static/style.css">
     <title>Cloudy Days - Previsioni Meteo</title>
 </head>
+    
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var launchButton = document.getElementById('login_btn');
@@ -44,15 +45,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 button2.style.display = "block";
                 button2.style.float = "right";
 
-                // login form
-                var form1 = document.getElementById("lab1");
-                var form2 = document.getElementById("lab2");
-                var form3 = document.getElementById("usernameform");
-                var form4 = document.getElementById("passwordform");
-                form1.style.display = "none";
-                form2.style.display = "none";
-                form3.style.display = "none";
-                form4.style.display = "none";
+                // Nascondi il modulo di login
+                var loginForm = document.getElementById("loginForm");
+                loginForm.style.display = "none";
 
                 // Aggiorna l'elenco delle città preferite
                 var favoriteCitiesList = document.getElementById('favoriteCitiesList');
@@ -75,16 +70,16 @@ document.addEventListener('DOMContentLoaded', function () {
                             searchButton.click(); // Simula il clic sul pulsante di ricerca
 
                             // Chiama lo script delle previsioni meteo
-                            var searchButton = document.getElementById('search_btn_forecast');
-                            var cityNameInput = document.getElementById('city-search-past');
-                            cityNameInput.value = city; // Imposta il nome della città cliccata nell'input
-                            searchButton.click(); // Simula il clic sul pulsante di ricerca
+                            var searchButtonForecast = document.getElementById('search_btn_forecast');
+                            var cityNameInputForecast = document.getElementById('city-search-forecast');
+                            cityNameInputForecast.value = city; // Imposta il nome della città cliccata nell'input
+                            searchButtonForecast.click(); // Simula il clic sul pulsante di ricerca
 
                             // Chiama lo script delle statistiche meteo
-                            var searchButton = document.getElementById('search_btn_past');
-                            var cityNameInput = document.getElementById('city-search-forecast');
-                            cityNameInput.value = city; // Imposta il nome della città cliccata nell'input
-                            searchButton.click(); // Simula il clic sul pulsante di ricerca
+                            var searchButtonPast = document.getElementById('search_btn_past');
+                            var cityNameInputPast = document.getElementById('city-search-past');
+                            cityNameInputPast.value = city; // Imposta il nome della città cliccata nell'input
+                            searchButtonPast.click(); // Simula il clic sul pulsante di ricerca
                         });
                     });
                 }
@@ -92,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-</script>
 
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
