@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var username = usernameform.value;
         var password = passwordform.value;
 
-        var url = 'https://f23jr74qg9.execute-api.us-east-1.amazonaws.com/dev';
+        var url = 'https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/login';
 
         fetch(url, {
             method: 'POST',
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // chiamata all'API per aggiungere la città ai preferiti
         var username = document.getElementById('lab3').textContent; 
-        var favoritesUrl = 'https://873wy22sg9.execute-api.us-east-1.amazonaws.com/dev';
+        var favoritesUrl = 'https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/addfavorite';
 
         fetch(favoritesUrl, {
             method: 'POST',
@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var password = document.getElementById('password').value;
 
         // Esegui la registrazione tramite l'API Gateway con email e password
-        var url = 'https://rh0lm380xf.execute-api.us-east-1.amazonaws.com/dev';
+        var url = 'https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/register';
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({ ID: email, password: password }),
