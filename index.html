@@ -124,8 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchButton = document.getElementById('search_btn');
     searchButton.addEventListener('click', function () {
         var cityName = document.getElementById('cityform').value;
-        var url = `https://qkx4dzo4xg.execute-api.us-east-1.amazonaws.com/dev?cityName=${cityName}`;
-
+        var url = `https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/realtime?cityName=${cityName}`;
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({ cityName: cityName }),
@@ -170,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchButton = document.getElementById('search_btn_forecast');
     searchButton.addEventListener('click', function () {
         var cityName = document.getElementById('city-search-forecast').value;
-        var url = `https://om9dp09s9a.execute-api.us-east-1.amazonaws.com/dev?cityName=${cityName}`;
+        var url = `https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/forecast?cityName=${cityName}`;
 
         fetch(url, {
             method: 'POST',
@@ -292,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var searchButton = document.getElementById('search_btn_past');
     searchButton.addEventListener('click', function () {
         var cityName = document.getElementById('city-search-past').value;
-        var url = `https://uwgyqfpwu0.execute-api.us-east-1.amazonaws.com/dev?cityName=${cityName}`;
+        var url = `https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/paststatistics?cityName=${cityName}`;
 
         fetch(url, {
             method: 'POST',
