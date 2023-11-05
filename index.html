@@ -51,14 +51,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Aggiorna l'elenco delle città preferite
                 var favoriteCitiesList = document.getElementById('favoriteCitiesList');
-                favoriteCitiesList.innerHTML = ""; // Cancella le città precedenti (se ce ne sono)
+                favoriteCitiesList.innerHTML = ""; 
 
                 if (bodyData.favorite_cities && Array.isArray(bodyData.favorite_cities)) {
                     // Aggiungi le città preferite come elementi della lista
                     bodyData.favorite_cities.forEach(function(city) {
                         var cityItem = document.createElement('li');
                         cityItem.textContent = city;
-                        cityItem.classList.add('clickable'); // Aggiungi una classe per rendere l'elemento cliccabile
+                        cityItem.classList.add('clickable'); 
                         favoriteCitiesList.appendChild(cityItem);
                 
                         // Aggiungi un gestore di eventi per gestire il clic sulla città
@@ -155,10 +155,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // Crea un nuovo oggetto Data
             var dataCorrente = new Date();
 
-            // Ottieni la data corrente (formato: YYYY-MM-DD)
             var data = dataCorrente.toISOString().slice(0, 10);
 
-            // Ottieni l'ora corrente (formato: HH:MM:SS)
+            // Ottieni l'ora corrente 
             var ora = dataCorrente.toTimeString().slice(0, 8);
             document.getElementById('todayDateTime').textContent = data + ", " + ora;
         })
@@ -232,7 +231,34 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 </script>
-    <script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var addToFavoritesButton = document.getElementById('add_to_favorites_btn');
+        addToFavoritesButton.addEventListener('click', function () {
+            var cityNameInput = document.getElementById('cityform');
+            var cityName = cityNameInput.value;
+    
+            // chiamata API
+            var username = document.getElementById('lab3').textContent; 
+            var favoritesUrl = 'https://873wy22sg9.execute-api.us-east-1.amazonaws.com/dev';
+    
+            fetch(favoritesUrl, {
+                method: 'POST',
+                body: JSON.stringify({ ID: username, cityName: cityName }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Città aggiunta ai preferiti:', data);
+            })
+            .catch(error => console.error('Errore nell\'aggiunta della città ai preferiti: ' + error));
+        });
+});
+
+</script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     var searchButton = document.getElementById('search_btn_past');
     searchButton.addEventListener('click', function () {
@@ -250,7 +276,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             console.log('Data:', data);
 
-            // Assicurati di analizzare correttamente la risposta JSON
             var responseJson = JSON.parse(data.body);
 
             // Estrarre i campi dalla risposta JSON
@@ -367,6 +392,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <input class="form-control" placeholder="Insert city name" type="text" id="cityform" name="inputCity" rows="1" required>
                         <p>
                         <button class="rounded-button" type="button" id="search_btn">Search</button>
+                        <button class="rounded-button" type="button" id="add_to_favorites_btn">Add to Favorites</button>
                         </p> 
                 </section>
             
@@ -386,11 +412,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="today-card">
             <p>Preferences</p>
             <ul id="favoriteCitiesList">
-             <!-- Qui verranno visualizzate le città preferite -->
             </ul>
         </div>
 
-        <!-- Ripeti lo stesso modello per gli altri giorni della settimana -->
     </section>
     <section class="container-title">
         <h2>Forecast</h2>
@@ -399,6 +423,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <section>
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search-forecast" name="inputCity" rows="1" required>
                     <button class="rounded-button" type="button" id="search_btn_forecast">Search</button>
+                    <button class="rounded-button" type="button" id="add_to_favorites_btn">Add to Favorites</button>
                 </section>
             
         </form>
@@ -467,6 +492,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search-past" name="inputCity" rows="1" required>
                         <p>
                         <button class="rounded-button" type="button" id="search_btn_past">Search</button>
+                        <button class="rounded-button" type="button" id="add_to_favorites_btn">Add to Favorites</button>
                         </p> 
                 </section>
             
