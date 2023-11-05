@@ -233,29 +233,58 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var addToFavoritesButton = document.getElementById('add_to_favorites_btn');
-        addToFavoritesButton.addEventListener('click', function () {
-            var cityNameInput = document.getElementById('cityform');
-            var cityName = cityNameInput.value;
-    
-            // chiamata API
-            var username = document.getElementById('lab3').textContent; 
-            var favoritesUrl = 'https://873wy22sg9.execute-api.us-east-1.amazonaws.com/dev';
-    
-            fetch(favoritesUrl, {
-                method: 'POST',
-                body: JSON.stringify({ ID: username, cityName: cityName }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Città aggiunta ai preferiti:', data);
-            })
-            .catch(error => console.error('Errore nell\'aggiunta della città ai preferiti: ' + error));
-        });
+
+    var addToFavoritesButton = document.getElementById('add_to_favorites_btn');
+    addToFavoritesButton.addEventListener('click', function () {
+        var cityNameInput = document.getElementById('cityform');
+        var cityName = cityNameInput.value;
+
+        // chiamata all'API per aggiungere la città ai preferiti
+        var username = document.getElementById('lab3').textContent; 
+        var favoritesUrl = 'https://873wy22sg9.execute-api.us-east-1.amazonaws.com/dev';
+
+        fetch(favoritesUrl, {
+            method: 'POST',
+            body: JSON.stringify({ ID: username, cityName: cityName }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Città aggiunta ai preferiti:', data);
+
+            // aggiungi la città alla lista delle città preferite
+            var favoriteCitiesList = document.getElementById('favoriteCitiesList');
+            var cityItem = document.createElement('li');
+            cityItem.textContent = cityName;
+            cityItem.classList.add('clickable');
+            favoriteCitiesList.appendChild(cityItem);
+
+            
+            cityItem.addEventListener('click', function() {
+                // real time weather
+                var searchButton = document.getElementById('search_btn');
+                var cityNameInput = document.getElementById('cityform');
+                cityNameInput.value = cityName; 
+                searchButton.click(); 
+                // forecast
+                var searchButtonForecast = document.getElementById('search_btn_forecast');
+                var cityNameInputForecast = document.getElementById('city-search-forecast');
+                cityNameInputForecast.value = cityName; 
+                searchButtonForecast.click(); 
+
+                // past stats
+                var searchButtonPast = document.getElementById('search_btn_past');
+                var cityNameInputPast = document.getElementById('city-search-past');
+                cityNameInputPast.value = cityName; 
+                searchButtonPast.click(); 
+            });
+        })
+        .catch(error => console.error('Errore nell\'aggiunta della città ai preferiti: ' + error));
+    });
 });
+
 
 </script>
 <script>
