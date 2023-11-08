@@ -6,6 +6,11 @@
     <link rel="stylesheet" type="text/css" href="static/style.css">
     <title>Cloudy Days - Previsioni Meteo</title>
 </head>
+
+    <script>
+        const base_url = "https://sfaphezpv8.execute-api.us-east-1.amazonaws.com/dev";
+        console.log(miaStringaCostante);
+    </script>
     
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -18,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var username = usernameform.value;
         var password = passwordform.value;
 
-        var url = 'https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/login';
+        var url = base_url + '/login';
 
         fetch(url, {
             method: 'POST',
@@ -162,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchButton = document.getElementById('search_btn');
     searchButton.addEventListener('click', function () {
         var cityName = document.getElementById('cityform').value;
-        var url = `https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/realtime?cityName=${cityName}`;
+        var url = base_url+'/realtime?cityName=${cityName}';
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({ cityName: cityName }),
@@ -210,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var searchButton = document.getElementById('search_btn_forecast');
     searchButton.addEventListener('click', function () {
         var cityName = document.getElementById('city-search-forecast').value;
-        var url = `https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/forecast?cityName=${cityName}`;
+        var url = base_url + '/forecast?cityName=${cityName}';
 
         fetch(url, {
             method: 'POST',
@@ -283,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // chiamata all'API per aggiungere la città ai preferiti
         var username = document.getElementById('lab3').textContent; 
-        var favoritesUrl = 'https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/addfavorite';
+        var favoritesUrl = base_url + '/addfavorite';
 
         fetch(favoritesUrl, {
             method: 'POST',
@@ -334,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var searchButton = document.getElementById('search_btn_past');
     searchButton.addEventListener('click', function () {
         var cityName = document.getElementById('city-search-past').value;
-        var url = `https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/paststatistics?cityName=${cityName}`;
+        var url = base_url + '/paststatistics?cityName=${cityName}';
 
         fetch(url, {
             method: 'POST',
@@ -402,7 +407,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var password = document.getElementById('password').value;
 
         // Esegui la registrazione tramite l'API Gateway con email e password
-        var url = 'https://ek340ix8u3.execute-api.us-east-1.amazonaws.com/dev/register';
+        var url = base_url + '/register';
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({ ID: email, password: password }),
