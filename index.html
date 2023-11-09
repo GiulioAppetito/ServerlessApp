@@ -280,7 +280,119 @@ document.addEventListener('DOMContentLoaded', function () {
 <script>
     document.addEventListener('DOMContentLoaded', function () {
 
-    var addToFavoritesButton = document.getElementById('add_to_favorites_btn');
+    var addToFavoritesButton = document.getElementById('add_to_favorites_btn1');
+    addToFavoritesButton.addEventListener('click', function () {
+        var cityNameInput = document.getElementById('cityform');
+        var cityName = cityNameInput.value;
+
+        // chiamata all'API per aggiungere la città ai preferiti
+        var username = document.getElementById('lab3').textContent; 
+        var favoritesUrl = base_url + '/addfavorite';
+
+        fetch(favoritesUrl, {
+            method: 'POST',
+            body: JSON.stringify({ ID: username, cityName: cityName }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Città aggiunta ai preferiti:', data);
+
+            // aggiungi la città alla lista delle città preferite
+            var favoriteCitiesList = document.getElementById('favoriteCitiesList');
+            var cityItem = document.createElement('li');
+            cityItem.textContent = cityName;
+            cityItem.classList.add('clickable');
+            favoriteCitiesList.appendChild(cityItem);
+
+            
+            cityItem.addEventListener('click', function() {
+                // real time weather
+                var searchButton = document.getElementById('search_btn');
+                var cityNameInput = document.getElementById('cityform');
+                cityNameInput.value = cityName; 
+                searchButton.click(); 
+                // forecast
+                var searchButtonForecast = document.getElementById('search_btn_forecast');
+                var cityNameInputForecast = document.getElementById('city-search-forecast');
+                cityNameInputForecast.value = cityName; 
+                searchButtonForecast.click(); 
+
+                // past stats
+                var searchButtonPast = document.getElementById('search_btn_past');
+                var cityNameInputPast = document.getElementById('city-search-past');
+                cityNameInputPast.value = cityName; 
+                searchButtonPast.click(); 
+            });
+        })
+        .catch(error => console.error('Errore nell\'aggiunta della città ai preferiti: ' + error));
+    });
+});
+
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+    var addToFavoritesButton = document.getElementById('add_to_favorites_btn2');
+    addToFavoritesButton.addEventListener('click', function () {
+        var cityNameInput = document.getElementById('cityform');
+        var cityName = cityNameInput.value;
+
+        // chiamata all'API per aggiungere la città ai preferiti
+        var username = document.getElementById('lab3').textContent; 
+        var favoritesUrl = base_url + '/addfavorite';
+
+        fetch(favoritesUrl, {
+            method: 'POST',
+            body: JSON.stringify({ ID: username, cityName: cityName }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Città aggiunta ai preferiti:', data);
+
+            // aggiungi la città alla lista delle città preferite
+            var favoriteCitiesList = document.getElementById('favoriteCitiesList');
+            var cityItem = document.createElement('li');
+            cityItem.textContent = cityName;
+            cityItem.classList.add('clickable');
+            favoriteCitiesList.appendChild(cityItem);
+
+            
+            cityItem.addEventListener('click', function() {
+                // real time weather
+                var searchButton = document.getElementById('search_btn');
+                var cityNameInput = document.getElementById('cityform');
+                cityNameInput.value = cityName; 
+                searchButton.click(); 
+                // forecast
+                var searchButtonForecast = document.getElementById('search_btn_forecast');
+                var cityNameInputForecast = document.getElementById('city-search-forecast');
+                cityNameInputForecast.value = cityName; 
+                searchButtonForecast.click(); 
+
+                // past stats
+                var searchButtonPast = document.getElementById('search_btn_past');
+                var cityNameInputPast = document.getElementById('city-search-past');
+                cityNameInputPast.value = cityName; 
+                searchButtonPast.click(); 
+            });
+        })
+        .catch(error => console.error('Errore nell\'aggiunta della città ai preferiti: ' + error));
+    });
+});
+
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+    var addToFavoritesButton = document.getElementById('add_to_favorites_btn3');
     addToFavoritesButton.addEventListener('click', function () {
         var cityNameInput = document.getElementById('cityform');
         var cityName = cityNameInput.value;
@@ -467,7 +579,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <input class="form-control" placeholder="Insert city name" type="text" id="cityform" name="inputCity" rows="1" required>
                         <p>
                         <button class="rounded-button" type="button" id="search_btn">Search</button>
-                        <button class="rounded-button" type="button" id="add_to_favorites_btn">Add to Favorites</button>
+                        <button class="rounded-button" type="button" id="add_to_favorites_btn1">Add to Favorites</button>
                         </p> 
                 </section>
             
@@ -498,7 +610,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <section>
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search-forecast" name="inputCity" rows="1" required>
                     <button class="rounded-button" type="button" id="search_btn_forecast">Search</button>
-                    <button class="rounded-button" type="button" id="add_to_favorites_btn">Add to Favorites</button>
+                    <button class="rounded-button" type="button" id="add_to_favorites_btn2">Add to Favorites</button>
                 </section>
             
         </form>
@@ -567,7 +679,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <input class="form-control" placeholder="Insert city name" type="text" id="city-search-past" name="inputCity" rows="1" required>
                         <p>
                         <button class="rounded-button" type="button" id="search_btn_past">Search</button>
-                        <button class="rounded-button" type="button" id="add_to_favorites_btn">Add to Favorites</button>
+                        <button class="rounded-button" type="button" id="add_to_favorites_btn3">Add to Favorites</button>
                         </p> 
                 </section>
             
