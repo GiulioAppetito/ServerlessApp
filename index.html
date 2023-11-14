@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Data:', data);
 
             // Analizza il campo "body" contenente una stringa JSON
-            var bodyData = JSON.parse(data.body);
+            var bodyData = data;
 
             if (data.statusCode == 200) {
                 var usernamelab = document.getElementById('lab3');
