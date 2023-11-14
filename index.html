@@ -517,8 +517,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Handle the register
     var registerButton = document.getElementById('registerButton');
     registerButton.addEventListener('click', function () {
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
+        var email = document.getElementById('emailmodal').value;
+        var password = document.getElementById('passwordmodal').value;
 
         // Esegui la registrazione tramite l'API Gateway con email e password
         var url = base_url + '/register';
@@ -565,9 +565,9 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="modal-content">
             <h2>Registration</h2>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="emailmodal" name="email" required>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="passwordmodal" name="password" required>
             <button id="registerButton">Register</button>
             <button id="cancelButton">Cancel</button>
         </div>
