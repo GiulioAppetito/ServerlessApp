@@ -13,8 +13,7 @@
     // stack : https://cgrcm4y9yl.execute-api.us-east-1.amazonaws.com/dev
     const base_url = "https://8ardgswldg.execute-api.us-east-1.amazonaws.com/dev";
 </script>
-    
-<script>
+<script>   
 document.addEventListener('DOMContentLoaded', function () {
     var launchButton = document.getElementById('login_btn');
     console.log('before Login function.');
@@ -38,66 +37,61 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             console.log('Data:', data);
 
-            // Analizza il campo "body" contenente una stringa JSON
-            var bodyData = data;
+            var usernamelab = document.getElementById('lab3');
+            usernamelab.innerHTML = data.message;
+            usernamelab.style.display = "block";
 
-            if (data.statusCode == 200) {
-                var usernamelab = document.getElementById('lab3');
-                usernamelab.innerHTML = bodyData.message;
-                usernamelab.style.display = "block";
+            var button1 = document.getElementById("login_btn");
+            var button2 = document.getElementById("logout_btn");
+            button1.style.display = "none";
+            button2.style.display = "block";
+            button2.style.float = "right";
 
-                var button1 = document.getElementById("login_btn");
-                var button2 = document.getElementById("logout_btn");
-                button1.style.display = "none";
-                button2.style.display = "block";
-                button2.style.float = "right";
+            // Nascondi il modulo di login
+            var loginForm = document.getElementById("loginForm");
+            loginForm.style.display = "none";
 
-                // Nascondi il modulo di login
-                var loginForm = document.getElementById("loginForm");
-                loginForm.style.display = "none";
+            // Aggiorna l'elenco delle città preferite
+            var favoriteCitiesList = document.getElementById('favoriteCitiesList');
+            favoriteCitiesList.innerHTML = ""; 
 
-                // Aggiorna l'elenco delle città preferite
-                var favoriteCitiesList = document.getElementById('favoriteCitiesList');
-                favoriteCitiesList.innerHTML = ""; 
+            if (data.favorite_cities && Array.isArray(data.favorite_cities)) {
+                // Aggiungi le città preferite come elementi della lista
+                data.favorite_cities.forEach(function(city) {
+                    var cityItem = document.createElement('li');
+                    cityItem.textContent = city;
+                    cityItem.classList.add('clickable'); 
+                    favoriteCitiesList.appendChild(cityItem);
+            
+                    // Aggiungi un gestore di eventi per gestire il clic sulla città
+                    cityItem.addEventListener('click', function() {
+                        // Chiama lo script del meteo attuale 
+                        var searchButton = document.getElementById('search_btn');
+                        var cityNameInput = document.getElementById('cityform');
+                        cityNameInput.value = city; // Imposta il nome della città cliccata nell'input
+                        searchButton.click(); // Simula il clic sul pulsante di ricerca
 
-                if (bodyData.favorite_cities && Array.isArray(bodyData.favorite_cities)) {
-                    // Aggiungi le città preferite come elementi della lista
-                    bodyData.favorite_cities.forEach(function(city) {
-                        var cityItem = document.createElement('li');
-                        cityItem.textContent = city;
-                        cityItem.classList.add('clickable'); 
-                        favoriteCitiesList.appendChild(cityItem);
-                
-                        // Aggiungi un gestore di eventi per gestire il clic sulla città
-                        cityItem.addEventListener('click', function() {
-                            // Chiama lo script del meteo attuale 
-                            var searchButton = document.getElementById('search_btn');
-                            var cityNameInput = document.getElementById('cityform');
-                            cityNameInput.value = city; // Imposta il nome della città cliccata nell'input
-                            searchButton.click(); // Simula il clic sul pulsante di ricerca
+                        // Chiama lo script delle previsioni meteo
+                        var searchButtonForecast = document.getElementById('search_btn_forecast');
+                        var cityNameInputForecast = document.getElementById('city-search-forecast');
+                        cityNameInputForecast.value = city; // Imposta il nome della città cliccata nell'input
+                        searchButtonForecast.click(); // Simula il clic sul pulsante di ricerca
 
-                            // Chiama lo script delle previsioni meteo
-                            var searchButtonForecast = document.getElementById('search_btn_forecast');
-                            var cityNameInputForecast = document.getElementById('city-search-forecast');
-                            cityNameInputForecast.value = city; // Imposta il nome della città cliccata nell'input
-                            searchButtonForecast.click(); // Simula il clic sul pulsante di ricerca
-
-                            // Chiama lo script delle statistiche meteo
-                            var searchButtonPast = document.getElementById('search_btn_past');
-                            var cityNameInputPast = document.getElementById('city-search-past');
-                            cityNameInputPast.value = city; // Imposta il nome della città cliccata nell'input
-                            searchButtonPast.click(); // Simula il clic sul pulsante di ricerca
-                        });
+                        // Chiama lo script delle statistiche meteo
+                        var searchButtonPast = document.getElementById('search_btn_past');
+                        var cityNameInputPast = document.getElementById('city-search-past');
+                        cityNameInputPast.value = city; // Imposta il nome della città cliccata nell'input
+                        searchButtonPast.click(); // Simula il clic sul pulsante di ricerca
                     });
-                }
-            }else {
-       
-                console.error('Risulta presente un errore nella richiesta:', data.statusCode);
-
+                });
             }
+        })
+        .catch(error => {
+            console.error('Errore nella richiesta:', error);
         });
     });
 });
+
 
 </script>
 <script>
