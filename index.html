@@ -10,7 +10,7 @@
 <script>
     const base_url = "https://1xs9vtzjd5.execute-api.us-east-1.amazonaws.com/dev";
 </script>
-<script>   
+<script>
 document.addEventListener('DOMContentLoaded', function () {
     var launchButton = document.getElementById('login_btn');
     console.log('before Login function.');
@@ -34,8 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             console.log('Data:', data);
 
+            // Estrai i campi dal body
+            var responseData = data.body ? JSON.parse(data.body) : data;
+
             var usernamelab = document.getElementById('lab3');
-            usernamelab.innerHTML = data.message;
+            usernamelab.innerHTML = responseData.message;
             usernamelab.style.display = "block";
 
             var button1 = document.getElementById("login_btn");
@@ -52,9 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
             var favoriteCitiesList = document.getElementById('favoriteCitiesList');
             favoriteCitiesList.innerHTML = ""; 
 
-            if (data.favorite_cities && Array.isArray(data.favorite_cities)) {
+            if (responseData.favorite_cities && Array.isArray(responseData.favorite_cities)) {
                 // Aggiungi le città preferite come elementi della lista
-                data.favorite_cities.forEach(function(city) {
+                responseData.favorite_cities.forEach(function(city) {
                     var cityItem = document.createElement('li');
                     cityItem.textContent = city;
                     cityItem.classList.add('clickable'); 
@@ -88,8 +91,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
-
 </script>
 <script>
     function imageStr(cloudiness) {
